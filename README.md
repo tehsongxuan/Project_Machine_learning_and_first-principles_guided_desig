@@ -1,424 +1,269 @@
-# BaTiO₃ Ceramic Materials Data Curation and AI-Ready Workflow Engineering
+# BaTiO₃ Materials Data Curation and AI-Ready Workflow Engineering
 
-**Repository:** `Project_Machine_learning_and_first-principles_guided_desig`  
-**Research focus:** Materials informatics · Solid-state chemistry · Scientific data curation · Computational provenance · Quality assurance · Reproducible Python workflows  
+**An independent research-data engineering project for reproducible, chemistry-aware materials informatics**
+
 **Material system:** Sr/La-substituted barium titanate, nominally `(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`  
-**Project type:** Independent scientific computing and research-data engineering portfolio  
-**Status — 4 November 2026:** Source acquisition, document review and preliminary workbook/linkage checks completed. Executable phase notebooks, full validation and independent modelling are **not yet completed**.
+**Research methods:** Solid-state chemistry · First-principles calculations · Scientific data curation · Data engineering · Machine-learning validation · Reproducible Python workflows  
+**Project status (4 November 2026):** Source documents acquired and preliminary workbook and cross-sheet checks undertaken; executable phase notebooks, comprehensive QC and independent modelling are not yet complete.
 
-> **Research objective:** Establish a traceable, scientifically checked evidence pipeline connecting original source cells, ceramic compositions, computational calculations, elemental descriptors and optional machine-learning predictions. The longer-term aim is to support reliable, physics-aware materials-design decisions without conflating computational screening, experimental fabrication and validated device performance.
+## Research foundation
+
+This project is informed by two complementary peer-reviewed publications:
+
+- **[*Machine learning and first-principles guided design of BaTiO₃-based materials for capacitor applications*](https://doi.org/10.1063/5.0314819)** — *Journal of Applied Physics* **139**, 064101 (2026). This study supplies the **ceramic materials system, first-principles and machine-learning methodology, and supplementary computational data** used in the project.
+- **[*Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery*](https://doi.org/10.1002/marc.70420)** — *Macromolecular Rapid Communications* (2026). This perspective provides the **research-infrastructure motivation** for connecting scientifically complete databases, physical reasoning, feasible materials design, practical processing and experimental validation.
+
+The publications have distinct scientific roles. The ceramic study is the **primary dataset and technical case**; the soft-matter perspective informs **which research questions a trustworthy materials-data workflow must address**. The resulting approach is an **independent methodological synthesis**, not an assertion that polymer and ceramic processing physics are interchangeable or that either publication's research team is involved in this project.
 
 ---
 
-## Contents
+## 1. Research objective and motivation
 
-1. [Project overview and scientific motivation](#1-project-overview-and-scientific-motivation)
-2. [Research sources, attribution and data rights](#2-research-sources-attribution-and-data-rights)
-3. [Source data and preliminary findings](#3-source-data-and-preliminary-findings)
-4. [Scientific foundations: ceramics, thermodynamics and data science](#4-scientific-foundations-ceramics-thermodynamics-and-data-science)
-5. [Research framework across the eight-page perspective](#5-research-framework-across-the-eight-page-perspective)
-6. [Detailed alignment with Section 5.1 and its four modules](#6-detailed-alignment-with-section-51-and-its-four-modules)
-7. [Section 5.2: the two limits that an automated loop cannot remove](#7-section-52-the-two-limits-that-an-automated-loop-cannot-remove)
-8. [Data model, scientific integrity and evidence classification](#8-data-model-scientific-integrity-and-evidence-classification)
-9. [Implementation roadmap: Phases 00–09](#9-implementation-roadmap-phases-0009)
-10. [Quality gates, reproducibility and repository structure](#10-quality-gates-reproducibility-and-repository-structure)
-11. [Expected research contribution, boundaries and next steps](#11-expected-research-contribution-boundaries-and-next-steps)
-12. [References and research independence](#12-references-and-research-independence)
+Modern computational tools can screen many candidate materials before the corresponding physical samples can be made and tested. The consequential research challenge is not only predictive speed: it is maintaining the scientific meaning, traceability and validation status of each proposed material and its associated evidence.
 
-## 1. Project overview and scientific motivation
+For a materials-discovery decision to be defensible, a predicted property must remain linked to the **composition and structural representation used, the reference calculations or measurements, the physical assumptions of those methods, the training data and validation design, and the available evidence of actual materials processing and performance**. A technically complete machine-learning table does not necessarily constitute a scientifically complete materials record.
 
-This project develops a **reproducible scientific data-curation and workflow-engineering pipeline** for the published study **Machine learning and first-principles guided design of BaTiO₃-based materials for capacitor applications** (2026). The source study uses first-principles calculations, feature engineering and regression models to screen Sr/La-substituted barium titanate compositions. Its aim is to identify promising computational composition regions and investigate selected structural, ferroelectric, mechanical and thermal properties relevant to capacitors.
+This repository will develop a reproducible data-curation and workflow-engineering pipeline for **BaTiO₃-based ceramic compositions**. It will establish a traceable evidence pathway from the original supplementary spreadsheets to standardised scientific records, first-principles results, material descriptors and, if warranted, independently evaluated machine-learning predictions.
 
-The present project addresses a complementary research-infrastructure question:
+**Central research question**
 
-**How can composition records, source calculations, materials descriptors and predictive outputs be curated into a reproducible, auditable evidence layer that a research team could confidently inspect, verify and extend?**
+> How can published BaTiO₃ computational data be converted into a scientifically interpretable, auditable and reproducible evidence layer that supports robust materials analysis, appropriately constrained AI-based screening and eventual integration with experimental validation?
 
-The project also examines how the research-infrastructure principles discussed in the 2026 perspective **[*Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery*](https://doi.org/10.1002/marc.70420)** can inform the curation of BaTiO₃ computational materials data. Particular attention is given to scientifically complete databases, physically informed simulation, process-aware materials design, and the traceability of experimental validation. This is an **independent methodological comparison across materials classes**, not a claim that the processing physics of polymers and ceramics are interchangeable or that the present work is part of the cited research programme.
+### Specific objectives
 
-### Research questions
+1. **Preserve scientific provenance:** link every curated value to its original file, worksheet, row and documented computation or definition.
+2. **Represent chemistry correctly:** distinguish nominal composition, spreadsheet coefficients, crystal-site descriptors, computational assumptions and unresolved interpretations.
+3. **Establish reliable scientific data quality:** audit source structure, missingness, duplicate identities, consistency, units, numerical plausibility and the status of failed or unavailable results.
+4. **Validate the computational evidence chain:** reconcile the descriptors and calculated energies across the supplementary sheets with explicit composition identifiers.
+5. **Prepare materials-informed ML inputs:** verify feature construction, document transformations, prevent target leakage and evaluate chemical-domain generalisation.
+6. **Constrain candidate design:** distinguish mathematically admissible compositions from computationally evaluated, predicted, experimentally tested and application-validated materials.
+7. **Specify pathways to future physical validation:** design appropriate, clearly *proposed* metadata structures for fabrication, characterisation, long-term reliability and human review.
+8. **Deliver reproducible software:** create transparent Python notebooks, reusable validation functions, data dictionaries, quality-control reports and documented execution requirements.
 
-1. Can the supplementary workbook's composition, descriptor and calculated-energy records be traced back to their exact source worksheets and cells?
-2. Are formulae, A-/B-site fields, chemical fractions, methods, units and feature definitions scientifically consistent, or do they require explicit review?
-3. Can the 231 reported DFT-labelled compositions be joined reproducibly across supplementary sheets without relying on row position?
-4. Does the available metadata support leakage-aware modelling and scientifically defensible extrapolation to the wider 30,301-composition candidate space?
-5. Which parts of a materials-discovery framework—**database, physical reasoning, constrained design and experimental evidence intake**—can be implemented with public computational data, and which require future laboratory evidence?
-6. How can provenance, uncertainty, failure classification, long-horizon validation and researcher oversight be built into the workflow from the outset?
+The sequence deliberately prioritises **scientific evidence and data reliability before predictive modelling**. AI benchmarking is an optional downstream phase, not a substitute for scientific validation.
 
-### Deliverable philosophy
+## 2. Scientific context: composition, processing and materials properties
 
-The first priority is a **source-linked, scientifically validated computational dataset**. Model benchmarking is conditional on satisfactory data checks. Proposals for robotic fabrication, instrument integration or long-term performance testing remain labelled as future architecture rather than accomplished laboratory work.
+A recurring difficulty in materials informatics is deciding whether the selected representation contains the information that actually controls the property of interest. For some quantities, chemical structure or composition provides a useful first approximation. For others, **processing conditions, microstructure, specimen state, measurement protocol and observation timescale** can materially change the answer. A robust representation must also distinguish information available at design time from information available only after synthesis, processing or measurement.
 
-## 2. Research sources, attribution and data rights
+This distinction is well illustrated by process-sensitive polymers and soft matter. Polymer structure-based descriptors do not necessarily capture **sequence, tacticity, molar-mass distribution, chain architecture or process history**. This is especially important for condition-sensitive quantities such as glass-transition temperature (**Tg**) and modulus. Thermoplastic properties may further depend on **melt viscosity, shear thinning, chain scission, crystallisation, cooling rates and repeated thermal or mechanical processing**. Small- and large-amplitude oscillatory shear, capillary rheometry and calorimetry probe different aspects of those behaviours. In supramolecular hydrogels, **water content, reversible physical associations, gelation kinetics, network topology, preparation history and ageing** can influence stiffness, swelling and release. Rheological quantities such as storage modulus **G′**, loss modulus **G″** and **tan δ**, together with structural and application-specific measurements, cannot be inferred reliably from a molecular formula alone.
 
-| Reference | Primary role | Access |
+The transferable scientific principle is **representation adequacy**: records should preserve the variables and measurement conditions needed to interpret a particular property. It is not a proposal to apply polymer-specific rheological laws to ceramic oxides.
+
+For **ceramic oxides**, analogous information requirements arise through different physical mechanisms. Chemical substitution and crystal-site occupancy influence local bonding, structural distortion and polar behaviour, while **phase formation, defects, grain size, density, porosity, sintering history, electrode configuration and testing conditions** may determine the properties of a fabricated capacitor. The present source workbook provides **computational composition, descriptor and energy information**; it does not provide a traceable database of manufactured ceramic specimens. A future experimental extension would therefore need additional data rather than inferred processing histories.
+
+### Crystal chemistry and computational representation
+
+BaTiO₃ belongs to the `ABO₃` perovskite family. In the nominal investigated formula, **Ba, Sr and La occupy the A-site composition space**, **Ti describes the B-site chemistry**, and oxygen forms the anion sublattice. Replacing Ba²⁺ with Sr²⁺ or La³⁺ changes the chemical and electronic context; La substitution introduces questions about charge compensation that must be handled consistently with the specific computational model. Nominal formula constraints alone do not establish an experimental defect mechanism.
+
+The published research uses **density functional theory (DFT)**, including a **virtual crystal approximation (VCA)** treatment, to calculate reference formation energies and related properties. DFT-derived values are outputs of a specified approximate quantum-mechanical calculation. They are distinct from **ML surrogate predictions**, which approximate relationships learned from labelled calculations, and from **physical measurements**, which require actual specimens and test protocols. All three evidence classes will remain separately identified throughout the project.
+
+Formation energy will be curated using its reported definition and **eV/atom** units, together with available reference-state and method information. Elastic, thermodynamic and polarisation-related quantities discussed in the source study will be documented as **separate scientific properties** where their underlying data and definitions can be verified. They will not be collapsed into an unsupported universal materials-performance score.
+
+## 3. Source data and present evidence
+
+### Source documents
+
+| Source | Role in the project | Official link |
 |---|---|---|
-| **[C]** 2026 ceramic study, **Machine learning and first-principles guided design of BaTiO₃-based materials for capacitor applications**, *Journal of Applied Physics* **139**, 064101 | Ceramic chemistry, methods, DFT/ML workflow, computational results | [DOI: 10.1063/5.0314819](https://doi.org/10.1063/5.0314819) |
-| **[SI]** Supplementary information to [C] | Formation-energy formulae, elastic and phonon-based thermodynamics, descriptor definitions, model settings, comparison tables | [Official supplementary collection](https://doi.org/10.60893/figshare.jap.c.8234602) |
-| **[X]** Supplementary Dataset.xlsx, worksheets S1–S4 | Primary tabular records for this independent curation exercise | [Official supplementary collection](https://doi.org/10.60893/figshare.jap.c.8234602) |
-| **[P]** 2026 perspective, **Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery**, *Macromolecular Rapid Communications* | Research framework: prediction–production gap, process-sensitive data, autonomous workflow modules and limits | [Journal record](https://doi.org/10.1002/marc.70420) |
+| Published BaTiO₃ research article | Scientific questions, DFT methods, feature construction, modelling and results | [Article DOI](https://doi.org/10.1063/5.0314819) |
+| Supplementary information document | Formation-energy methodology, physical-property calculations, feature definitions and model settings | [Publisher supplementary collection](https://doi.org/10.60893/figshare.jap.c.8234602) |
+| Supplementary Excel workbook, sheets `S1`–`S4` | Primary composition, descriptor and calculated-energy records for curation | [Publisher supplementary collection](https://doi.org/10.60893/figshare.jap.c.8234602) |
+| Autonomous soft-matter discovery perspective | Research questions concerning information quality, physical reasoning, constrained design, processing and long-term validation | [Perspective DOI](https://doi.org/10.1002/marc.70420) |
 
-All eight printed pages of [P], the main ceramic article and the supplementary text were considered when preparing this plan. Sections and figure numbers below refer to the **published sources**, not figures generated by this project. The article author lists are available through the original publication records.
+### Preliminary workbook inventory
 
-**Responsible reuse.** The ceramic article states that its article content is CC BY 4.0 except where otherwise noted. Rights attached to separately hosted supplementary files must be checked independently. This public repository should distribute original scripts, permissible validation summaries and documentation; the original workbook, paper PDFs and publisher figures should **not** be republished without confirming applicable permissions. Raw inputs should remain unchanged and be acquired from the official source links.
+The following findings originate from an **initial inspection** of the supplied workbook, not yet from the complete, publicly executable audit planned for Phases 00–01.
 
-## 3. Source data and preliminary findings
+| Worksheet | Data rows | Columns | Preliminary interpretation |
+|---|---:|---:|---|
+| `S1` | **30,301** | 100 | Candidate composition and descriptor space; not 30,301 independently calculated DFT targets |
+| `S2` | **231** | 102 | Composition fields, descriptors, final energies and formation-energy labels |
+| `S3` | **231** | 82 | Retained machine-learning input descriptors |
+| `S4` | **231** | 10 | Composition, reported calculation method and structure labels, and energy records |
 
-### 3.1 Supplementary workbook inventory
+Initial checks indicate **231 unique composition keys** in each of `S2`, `S3` and `S4`, with compatible composition identities; shared `S2`/`S3` feature values and the `S2`/`S4` reported energy values agree in the preliminary comparisons. No empty cells in the inspected populated ranges or exact duplicate complete records were found. These are **structural observations**, not proof of DFT convergence, physical validity or model generalisation. They will be independently reproduced, logged and exposed to inspection in the implementation.
 
-The initial structural audit identified the following worksheets. **Counts below are source-file observations, not the results of a full scientific-data validation or DFT reproduction.**
+The published study describes **100 initial material features** and **82 retained model inputs**, after exclusion of 16 invariant features and two non-input fields (a descriptive final-energy field and the formation-energy target). The 231 labelled records and 30,301 candidate records will remain distinct populations, with separate evidence-status definitions.
 
-| Sheet | Data rows | Columns | Observed content | Evidence boundary |
-|---|---:|---:|---|---|
-| **S1** | **30,301** | **100** | Composition/descriptor candidate space; formula-generated row index | Candidate entries are not 30,301 independent DFT calculations or synthesised materials. |
-| **S2** | **231** | **102** | Compositions, descriptors, reported final energies and formation energies | Calculated labels require method and unit provenance; not experimental capacitor measurements. |
-| **S3** | **231** | **82** | Selected machine-learning input features | Feature matrix alone is not a target table or validated test split. |
-| **S4** | **231** | **10** | Compositions, `GGA-PBE(VCA)`, `P4mm`, and reported energy values | Contains selected computation descriptors, not complete electronic-structure input/output logs. |
+### Priority chemical-interpretation question
 
-Preliminary comparisons indicate **231 unique composition keys** shared by S2, S3 and S4; shared S2/S3 selected-feature values match, and the S2/S4 final- and formation-energy fields agree for the linked compositions. No exact duplicate complete records or empty cells were detected within the inspected populated ranges. These observations must be reproduced by the public Phase 01 audit before being promoted to final project findings. [X]
+The nominal composition is **(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃**, with nominal A-site substitution bounds **x ≥ 0, y ≥ 0 and x + y ≤ 1**.
 
-The published study describes a progression from **100 candidate material features** to **82 model inputs**, excluding 16 constant features, one descriptive final-energy feature and the formation-energy target. The model-ready matrix contains 231 rows, while a larger candidate space is screened using ML predictions. [C, pp. 4–5; SI, Table S1 and Figure S1]
+In the initial workbook inspection, `Ba + Sr + La = 1` for the 231 labelled compositions, while the **tabulated Ti coefficient** follows `Ti = 1 − La/2`; 210 entries have tabulated Ti values below 1. The main paper describes the nominal TiO₃ formula and states that explicit Ti or oxygen vacancies were **not introduced** in the specified first-principles calculations.
 
-### 3.2 Priority scientific review: nominal versus tabulated composition
+This requires **scientific reconciliation of source encoding and modelling assumptions**, not automatic data correction. The workflow will retain separate fields for the original coefficients, nominal representation, calculated diagnostic relationships and interpretation status. It will **not** infer actual Ti vacancies, alter the source values or assert charge-compensation mechanisms from a spreadsheet pattern alone.
 
-The nominal material system is:
+That issue is a practical example of why data curation in materials science involves chemical interpretation, not simply correcting missing values and column formats.
 
-`(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`, subject to `x ≥ 0`, `y ≥ 0` and `x + y ≤ 1` for the nominal A-site fractions.
+## 4. Research strategy: a trustworthy materials-evidence workflow
 
-The preliminary spreadsheet inspection found `Ba + Sr + La = 1` across the 231 labelled entries, but the workbook's **tabulated Ti coefficient** follows `Ti = 1 − La/2`, with Ti below 1 in **210 of the 231 records**. The main article explains that its stated first-principles models did not explicitly introduce Ti- or O-vacancy charge-compensation defects. [C, p. 3; X]
+The architecture follows four connected research needs: **scientific memory, physically grounded computation, constrained materials design and credible physical validation**. Each is implemented only to the level supported by the available data.
 
-**Curation response:** retain the original Ti field, define separate `nominal_formula`, `source_formula` and `Ti_tabulated` attributes, record the observed algebraic relationship as a QC review item and investigate the modelling convention. **Do not infer actual Ti vacancies, alter coefficients to match the nominal formula or claim a verified physical defect mechanism from the spreadsheet alone.** The article's discussion of electronic/VCA compensation and the spreadsheet representation must remain distinguishable.
+### 4.1 Scientific memory: complete metadata, provenance and quality control
 
-### 3.3 Evidence categories
+A useful scientific database must retain more than a composition and a number. It needs the origins, methods, conditions, transformations and limitations that make the number interpretable. Particularly important are **unreported information, genuinely failed attempts, unsuccessful outcomes and ambiguous scientific associations**. Excluding or misclassifying such cases can introduce selection bias into downstream analysis.
 
-The workflow will distinguish at least:
+**Project response**
 
-- `candidate_only`: a composition/descriptor record without a supplied reference energy;
-- `calculation_reported`: a DFT-related calculated energy is provided and attributable;
-- `prediction_generated`: an independently produced ML estimate with model version and validation context;
-- `experimental_result_documented`: physical synthesis or measurement supported by an actual experimental source;
-- `failed_calculation_documented`: a failed computational attempt supported by a source log;
-- `unknown`: provenance or status cannot yet be resolved.
+- Maintain an immutable source registry: publication DOI, download location, source version, acquisition date, file size, SHA-256 checksum and redistribution-review status.
+- Preserve source-level identity: original filename, sheet, row, column/header, formula or cached value, and stable source-record identifier.
+- Define material and computation records with explicit composition, structure, computational method, reported energy, unit, descriptor source and evidence class.
+- Build a descriptor dictionary covering **A-/B-site relevance, elemental meaning, weighting/aggregation rule, units, allowed values and source references**, including the 82 selected modelling inputs.
+- Create a quality-control register for invalid or ambiguous values, duplicate keys, unit conflicts, source discrepancies, unresolved mappings and scientifically reviewable anomalies.
+- Represent **candidate-only, DFT-calculated, ML-predicted, experimentally observed, documented failed and unknown** states explicitly. An unlabelled candidate is **not** evidence of a failed calculation or synthesis.
+- Preserve raw observations; any standardisation or filtering will be recorded as a new, reproducible transformation rather than an undocumented change to a source file.
 
-**Absence of a DFT label is not evidence of a failed calculation or unsuccessful synthesis.** No genuine failure log should be created from unlabelled S1 rows.
+**Why it matters.** A formation-energy prediction may look precise but become unusable if its target, units, DFT assumptions or chemical identity cannot be reconstructed. A traceable database makes errors identifiable, supports reanalysis and provides a reliable starting point for later physical work.
 
-## 4. Scientific foundations: ceramics, thermodynamics and data science
+**Expected artefacts:** `source_registry.csv`, `source_manifest.json`, `workbook_inventory.csv`, `data_dictionary.csv`, `descriptor_dictionary.csv`, `qc_findings.csv`, `evidence_status_dictionary.csv` and provenance-link tables.
 
-### 4.1 Ceramic chemistry and the formation-energy target
+### 4.2 Physical reasoning: traceable DFT references and validated ML surrogates
 
-BaTiO₃ is a perovskite oxide, often described by an `ABO₃` crystal framework. In this composition family, Ba, Sr and La contribute to the nominal **A-site** composition; Ti occupies the B-site in the nominal formula; oxygen forms the anion framework. Sr and La substitutions change local chemical and electronic environments and are studied for their effects on polar order and dielectric behaviour. [C, pp. 1–4]
+Fast surrogate models can be valuable when they approximate a costly physical calculation within a **specified validity domain**. However, model accuracy on nearby compositions is not equivalent to accuracy on unfamiliar chemistries, nor does agreement with DFT establish experimental performance. A reliable computational workflow therefore links predictions to the *actual reference method* and makes extrapolation visible.
 
-The study uses **density functional theory (DFT)** and a **virtual crystal approximation (VCA)**-related workflow to calculate formation energies for selected compositions. DFT estimates electronic-structure energies under specified physical approximations. VCA represents mixed-site substitution using averaged pseudopotential descriptions; the main paper also describes selected supercell calculations and associated electronic-compensation assumptions. Different computational routes should not be collapsed into a single undocumented method label. [C, p. 3; SI, Text S1]
+**Project response**
 
-Formation energy is defined relative to specified elemental reference states and a normalisation convention. The reported target is in **eV/atom**. A more negative value may be informative *within the stated reference and method*, but it does not alone establish phase purity, processability, long-term reliability, experimentally achieved dopant incorporation or capacitor performance.
+- Maintain distinct fields for `reference_formation_energy_eV_atom`, `independent_prediction_eV_atom`, `prediction_residual_eV_atom`, `calculation_method`, `model_run_id` and `validation_split_id`.
+- Reconcile the 231 labelled composition records and energy values between `S2` and `S4` by explicit scientific keys, not assumed row order.
+- Reconstruct the feature inventory: explain the transition from 100 candidate features to 82 model inputs; check constants, correlated descriptors, physical definitions and inadvertent target-derived inputs.
+- Confirm exact `S2`–`S3` linkage for the 82 retained features and preserve an explicit feature-exclusion manifest.
+- Investigate data leakage, near-duplicate compositions and split-sensitive processing. Any learned transformation, imputation or feature selection for a new experiment must be fitted on the training partition alone.
+- Where justified, benchmark simple regressors and selected tree/ensemble methods, using **MAE, RMSE, R², residual analysis, declared units and recorded seeds**. Report ordinary splits alongside feasible **held-out composition-region** tests in the Sr/La design space.
+- Measure how far each screened candidate lies from the available labelled chemistry, and flag out-of-domain estimates rather than extrapolating without qualification.
+- Specify, as a *future capability only*, how uncertain predictions could be submitted for additional high-fidelity calculations and subsequently recorded as new evidence.
 
-The publication additionally investigates selected polarisation behaviour, Landau–Ginzburg–Devonshire (LGD) parameters, elastic anisotropy and thermodynamic properties. These are **separate physical quantities** with different calculation methods, units and levels of evidence. Supplementary material documents elastic quantities including bulk, shear and Young's moduli, and phonon-related thermal quantities such as entropy, enthalpy and heat capacity. [C, pp. 8–15; SI, Texts S2–S3 and Tables S4–S5]
+The physical reasoning here is distinct from polymer simulations of viscoelastic flow, cooling and crystallisation. What transfers is the need to **tie a fast approximation to an identified physical reference and periodically reassess its validity**. The present repository cannot run a live closed-loop DFT service using the supplementary workbook alone.
 
-### 4.2 Materials descriptors and modelling
+**Expected artefacts:** `calculation_provenance.csv`, `feature_exclusion_manifest.csv`, `feature_linkage_checks.csv`, `leakage_audit.csv`, `split_plan.json`, `ml_readiness_report.md` and, if the evidence permits modelling, `benchmark_results.csv`, `prediction_audit.csv` and `model_card.md`.
 
-The source study constructs elemental and site-specific descriptors using compositional weighting, including elemental attributes such as atomic/ionic radii, atomic weight, electronegativity, valence-related quantities and other tabulated properties. Correlated descriptors can become redundant; constant columns contain no discriminating information within the training population. [C, pp. 4–5; SI, Table S1]
+### 4.3 Materials design: composition constraints and evidence-aware screening
 
-The published modelling compares linear regression, support vector regression, multilayer perceptron, decision-tree regression, random forest and XGBoost. It reports a **4:1 training/test ratio**, MAE/RMSE/R² metrics and SHAP-based interpretation. The reported high predictive agreement is a result **from that study's evaluation design** and does not establish reliable extrapolation to every new chemical region. [C, pp. 5–8; SI, Tables S2–S3]
+Materials design should not rank candidates solely by a favourable predicted value. The candidate must be chemically defined, compatible with the modelling domain and appropriately assessed against physical or processing constraints. Predicted formation energy offers **one computational consideration** in materials design, not a demonstration of phase-pure synthesis, stable manufacturing or capacitor reliability.
 
-Independent benchmarking will therefore assess `feature → target` lineage, duplicate or near-neighbour composition leakage, preprocessing fitted on training folds, blocked composition-region splits where feasible, and uncertainty/out-of-distribution warnings before candidate screening.
+**Project response**
 
-### 4.3 Transferable concepts from polymer and soft-matter research
+- Validate the nominal A-site fraction constraints `x ≥ 0`, `y ≥ 0` and `x + y ≤ 1`, plus non-negativity and any verified bounds of the published candidate search space.
+- Track the original Ba, Sr, La, Ti and O coefficients separately from a constructed nominal formula; retain the Ti–La interpretation issue for scientific review.
+- Check descriptor completeness and model-input compatibility before assigning estimates to previously unlabelled candidates.
+- Distinguish records that are **proposed compositions**, **reported first-principles calculations**, **independent ML predictions** and **documented experimental materials**. Advancing to a stronger evidence category requires new supporting records.
+- Treat charge-compensation assumptions, structural phase, polarisation behaviour, energy barriers, mechanical properties, dielectric performance and synthesising conditions as separate constraints or evidence types.
+- Produce candidate lists with explicit model version, predicted target and units, domain flag, source coverage and human-review status; avoid unsupported “best material” rankings.
 
-The perspective distinguishes **chemistry-dominated**, **condition-dependent** and **process-history-dependent** properties. These represent a hierarchy of what information a materials model must retain. [P, p. 3; Figure 2 on p. 4]
+A processability-aware screen can be specified for future use, but it cannot be operationally populated with **sintering yield, deposition conditions, microstructure or electrical measurements** unless those data are genuinely available.
 
-- **Chemistry-dominated behaviour:** Repeat-unit or molecular descriptors can capture substantial information for some intrinsic quantities. In ceramics, elemental composition and structure-related descriptors serve analogous *data-representation* functions, but describe different physics.
-- **Condition-dependent behaviour:** Polymer **glass-transition temperature (Tg)** and modulus can depend on molecular mass, heating/measurement protocols and thermal history. Ceramic polar transitions, symmetry and calculated energetics likewise require well-defined conditions and structural assumptions; the corresponding physical mechanisms are different.
-- **Process-history-dependent behaviour:** Semicrystalline morphology, melt strength, network organisation and degradation may require processing histories that cannot be reconstructed from a molecular string. For ceramics, analogous data-engineering questions concern powder preparation, thermal schedules, sintering, defects, grain structure, deposition history and device measurements—**only when such data actually exist**.
+**Expected artefacts:** `candidate_registry.csv`, `composition_validation.csv`, `composition_representation_review.csv`, `candidate_constraints.json` and conditional `candidate_screening.csv`.
 
-Polymer informatics features such as SMILES, RDKit descriptors and molecular fingerprints, and soft-matter measurements such as **storage modulus G′, loss modulus G″, tan δ, shear-rate-dependent viscosity and sol–gel transitions**, provide methodological precedents for careful feature definition, unit treatment and source linkage. They are not used as numerical substitute features for the present oxide dataset.
+### 4.4 Physical execution and characterisation: a carefully bounded data interface
 
-The unifying principle is **scientifically sufficient representation**: no model can condition on processing, structure, uncertainty or measurement conditions that the dataset does not record.
+Materials discovery must eventually connect a proposed composition to **a real processing route, a particular physical specimen and a measured property**. In process-sensitive thermoplastics, viscous melt flow, shear history and cooling can determine final morphology; in supramolecular hydrogels, assembly and preparation history shape the observed network state. Similar data-engineering discipline is needed in ceramics, although their mechanisms and experimental protocols differ.
 
-## 5. Research framework across the eight-page perspective
+For ceramic oxides, future physical records might include precursor lots and purity, powder preparation, milling, calcination, sintering temperature/time/atmosphere, coating or thin-film deposition settings, heating/cooling profiles, phase identification, grain size, density, porosity, electrode configuration, dielectric testing and instrument calibration. **These are prospective metadata requirements, not measurements found in the current workbook.**
 
-This section records the perspective's intellectual progression. **Page 5 is developed in depth in Sections 6–7 below**; the surrounding pages are retained because they explain why the modules are necessary and where their effectiveness ends.
+**Project response**
 
-| Printed page | Scientific argument and research emphasis | Implication for this repository |
-|---|---|---|
-| **1 — Abstract and opening** | Modern prediction and generative design are accelerating faster than the capacity to fabricate, process and validate some materials; the limiting step can lie in process physics and slow performance outcomes. | Prioritise scientifically complete data and evidence status, not only model accuracy. |
-| **2 — Three waves of AI; prediction–production asymmetry** | Descriptor regression, learned representations and generative/autonomous design expand capability; validated data and physical experiments do not necessarily keep pace. Data-sparse unfamiliar regions create extrapolation risk. | Maintain the 231 DFT-labelled and 30,301 candidate populations separately; test domain coverage and blocked generalisation. |
-| **3 — Three property regimes; two material cases** | Chemistry, measurement conditions and process history contribute differently to material behaviour. Thermoplastics depend on melt flow and thermal history; supramolecular hydrogels depend on aqueous assembly and network state. | Attach method/structure/condition metadata to ceramic energy records; design future processing and measurement schemas without treating polymers as ceramics. |
-| **4 — Figures 2 and 3; autonomous-lab transition** | A representation hierarchy identifies missing measurements and metadata. Contrasting thermoplastic and hydrogel cases reveal different experimental bottlenecks and slow validation horizons. | Define a data dictionary and evidence-lineage hierarchy; separate model inputs, computed properties and future physical tests. |
-| **5 — Section 5.1 and start of 5.2** | Four modules—**Database, Simulation, Generation, Synthesis/Manufacturing/Characterisation**—must interact around reliable informatics. Closed loops do not eliminate long-duration testing. | Core architecture for Phases 00–09; detailed implementation and quality gates in Section 6. |
-| **6 — Figure 4 and continuation of 5.2** | Fast surrogate loops require slower, periodic high-fidelity checks; physical handling, scale-up, ageing mechanisms and safe autonomy remain limiting. | Include future recalibration requests, validation horizons, execution-event provenance and human review; do not present them as operational. |
-| **7 — Concluding roadmap** | Prioritise metadata-complete failure-inclusive databases, soft-matter process science, fast surrogates, mechanism-aware ageing bridges and processability-aware design. Impact is material deployment rather than prediction speed alone. | Invest first in data provenance and QC, then ML readiness, then carefully bounded experimental integration specifications. |
-| **8 — References** | Provides the cited research context and supporting literature; no separate supplementary experimental dataset is presented on this page. | Trace claims to the cited perspective and the ceramic source; keep article figures and publisher content linked rather than copied into the repository. |
+- Design an **optional experimental extension** with `experimental_batch`, `specimen`, `processing_step`, `instrument_run`, `calibration`, `measurement`, `quality_event` and `failure_log` entities.
+- Require separate identifiers for computational compositions/calculations and physical specimens. Matching chemical formulae do not establish sample identity.
+- Distinguish intended process settings from observed conditions, original instrument files from processed measurements, and successful outcomes from recorded aborted or failed operations.
+- Specify machine-readable protocol identifiers, source timestamps, units, calibration references, structured event logs, exception handling and decision audit trails.
+- Include human review when a future model recommendation might influence physical experimentation.
 
-### 5.1 Three waves of AI and the validated-data gap — Pages 1–2
+The present project will **document the interface and validation rules**; it does not claim robotic laboratory control, experimental characterisation or access to research instruments.
 
-The perspective's qualitative Figure 1 contrasts rapid growth in modelling capability with slower accumulation of validated physical evidence. This project addresses that asymmetry at the **data interface**: a candidate generated by a model cannot be treated as a DFT-labelled reference, and a DFT-labelled calculation cannot be treated as a fabricated device. The project will provide machine-readable evidence categories and traceable record ancestry so that scientific claims can be evaluated at their actual evidence level.
+**Expected artefacts:** `experimental_schema_proposal.md`, `specimen_linkage_rules.md`, `measurement_metadata_template.csv` and `instrument_event_schema.json`.
 
-### 5.2 Three property regimes — Page 3
+## 5. Two persistent research limits: time and physical processability
 
-The perspective challenges over-reliance on a chemistry-only representation when material performance depends on preparation, state or measurement protocol. For the ceramic study, a composition must be linked to its **computational representation** (A/B-site fields, structure label, electronic method and target definition), and future experimental properties would require processing, specimen and measurement conditions. *This is a transfer of scientific metadata discipline, not a transfer of polymer-specific constitutive models.*
+Reliable data engineering can reduce avoidable errors and support more efficient research decisions. It does not eliminate the physical constraints that govern actual materials behaviour.
 
-### 5.3 Two contrasting process-sensitive cases — Pages 3–4
+### 5.1 Slow properties, ageing and mechanism-aware validation
 
-**Sustainable thermoplastics:** The perspective stresses melt viscosity, shear thinning, extrusion and cooling histories, reprocessing stability and long-term recyclability. Techniques such as SAOS/LAOS rheology, capillary rheometry and DSC/FSC provide measurements that a repeat-unit descriptor cannot replace. A corresponding ceramic data architecture would need process-route, thermal-programme, equipment and microstructure records if real fabrication data were later supplied.
+A short test or a fast prediction is not automatically a substitute for long-duration performance. For polymers, this concern includes **creep, stress relaxation, degradation, repeat-processability, molecular or network ageing and biological response**. Accelerated approaches such as **time–temperature superposition and WLF/Arrhenius-based treatments** depend on appropriate mechanisms and valid temperature or stress regimes; morphological transitions, chemical changes and nonlinear responses can invalidate straightforward extrapolation.
 
-**Supramolecular hydrogels:** Gel formation, transient non-covalent interactions, water content, network topology and preparation history can affect stiffness, swelling, release and biomedical performance. Rheology, small-angle scattering, cryogenic microscopy and release assays interrogate different levels of material structure. The analogous *data-engineering* lesson is to preserve specimen and protocol context and not infer unobserved material states from formulation alone. The source BaTiO₃ workbook contains computational records and is **not** such an experimental dataset.
+For ceramic capacitors, future research may require **dielectric ageing, electrical fatigue, breakdown testing, thermal cycling and long-term device reliability**. These cannot be inferred from the supplied DFT formation-energy table.
 
-### 5.4 Representation hierarchy and the physical-validation boundary — Page 4
+The project will specify a future `long_horizon_validation` record with specimen identity, property, stressor, protocol, actual duration, time series, uncertainty, mechanistic assumptions and validated extrapolation domain. It will distinguish **direct observation**, **validated accelerated testing**, **unvalidated proxy** and **model extrapolation**. The fields remain unpopulated where source evidence does not exist.
 
-Figure 2 progresses from repeat-unit chemistry through sequence/architecture to processed morphology and assembly. Figure 3 contrasts two materials classes along the same chain: what a design representation captures, what it misses, which experiments supply missing evidence and which slow outcomes determine success. For this project, that logic motivates a typed evidence chain:
+### 5.2 The execution gap and processing-dependent physics
+
+Physical automation introduces constraints that are not visible in a composition-only dataset: flow behaviour, material handling, equipment condition, fouling, thermal gradients, batch variability, instrument response and scale effects. Non-dilute polymer solutions and melts can exhibit **non-Newtonian viscosity, yield-stress behaviour, elastic recoil and shear-induced structural changes**; ceramics processing can instead involve **powder flow, slurry rheology where relevant, sintering shrinkage, defect control, grain development, phase purity and furnace or deposition uniformity**.
+
+The project addresses these limits by specifying **route-specific process metadata and decision provenance**, not by claiming that any physical bottleneck is solved. Potential research automation must preserve human accountability, process safety, instrument state and the distinction between a proposed action and a verified outcome. Demonstration at laboratory scale would also not, without further evidence, establish manufacturing-scale reliability.
+
+## 6. Evidence architecture and scientific data model
+
+The planned pipeline separates evidence levels while providing explicit, inspectable links:
 
 ```text
-Original source file + cell coordinates
-       ↓
-Composition and computational representation
-       ↓
-DFT-related reference calculation + method metadata
-       ↓
-Verified descriptors + 82-feature modelling matrix
-       ↓
-Model run + split + validation + optional prediction
-       ↓
-[Future only] documented synthesis → specimen → measurement → long-horizon validation
+Original publication and supplementary files
+    ↓  source identifier, file hash, worksheet/cell coordinates
+Immutable source record and scientific metadata
+    ↓  verified composition mapping and original coefficients
+Material composition and computational representation
+    ↓  method, structural assumption, target definition, units
+Reported DFT reference calculation
+    ↓  validated descriptor definitions and composition-level linkage
+Analysis-ready features and targets
+    ↓  documented splitting, modelling and evaluation (optional)
+Independent ML prediction with applicability and uncertainty flags
+    ↓  future extension only; requires new supporting evidence
+Physical processing record → identified specimen → measurement
+    ↓  additional experimental programmes and observation time
+Long-duration validation / performance decision
 ```
 
-Each arrow requires a verifiable identifier or a documented unresolved linkage; no downstream status is inferred merely because an upstream record exists.
+No link is created merely because two records occupy the same row number or have similar filenames. Proposed future entities do not imply that corresponding experimental data have been collected.
 
-## 6. Detailed alignment with Section 5.1 and its four modules
+### Proposed core records
 
-The perspective's Section 5.1 (printed Page 5) proposes an informatics-centred loop with **four integrated modules**. The sections below set out a direct implementation response using the actual BaTiO₃ data. They differentiate **source evidence**, **independent planned engineering** and **future physical extensions**.
-
-### 6.1 Section 5.1.1 — Database (Memory)
-
-**Research issue.** Scientifically useful memory must preserve conditions, uncertainty, lineage, successes, documented failures and actual process history. Storing isolated numerical results without the conditions that produced them can mislead model training and materials decisions. [P, p. 5]
-
-**Available ceramic evidence.** The workbook supplies source compositions, selected descriptors, calculated energies and method labels for linked computational records. The supplementary text supplies feature nomenclature and calculation descriptions. It does **not** supply a full experimental batch history, physical failure log or complete computational job provenance for every entry. [C; SI; X]
-
-**Planned curation response:**
-
-1. **Source registration:** capture publisher DOI, file name, SHA-256, byte size, acquisition/version date, worksheet name, Excel row/column, exact original header, source-cell values, formulas versus cached values and redistribution-review status.
-2. **Chemistry-aware schema:** represent `composition_id`, nominal A-site fractions, original Ba/Sr/La/Ti/O coefficients, computational target, units and source identifiers. Keep nominal and workbook-reported formulae separately.
-3. **Descriptor dictionary:** record each abbreviation, chemical/physical meaning, A-/B-/X-site role, aggregation or weighting formula, unit, permissible range and reference to [SI]. Audit all **82 selected inputs** rather than assuming numerical column labels are self-explanatory.
-4. **Calculation metadata:** retain `GGA-PBE(VCA)` and `P4mm` labels where S4 supports them; store additional paper-level VCA/supercell/DFT assumptions without assigning unsupported individual-run metadata.
-5. **Failure-inclusive schema, without invented failures:** provide nullable fields for calculation-job outcome, error reason, physical processing outcome and reviewer disposition; distinguish `unknown` from `failed` and `not attempted`.
-6. **Quality and uncertainty:** store validation rule, severity, source evidence, disposition, provenance status and unresolved interpretation. An unverified method parameter is recorded as unavailable, not guessed.
-7. **Evidence lineage:** maintain links from source file/cell through composition → calculation → descriptor/feature vector → split/model run → optional prediction. Preserve original source records unchanged.
-
-**Suggested outputs:** `source_registry.csv`, `source_manifest.json`, `workbook_inventory.csv`, `composition.csv`, `calculation.csv`, `descriptor_dictionary.csv`, `qc_findings.csv`, `provenance_links.csv`, `evidence_status_dictionary.csv`.
-
-**Acceptance criteria:** every curated row maps back to a source location; composition keys are unique or explicitly flagged; descriptor meanings are documented or unresolved; unlabelled S1 candidates are never automatically marked as failures; no original scientific observation is silently replaced.
-
-**Research value:** a reusable and auditable computational evidence base, with a clear boundary between known, missing and uncertain scientific information.
-
-### 6.2 Section 5.1.2 — Simulation (Physical Reasoning)
-
-**Research issue.** Faster surrogate predictors are useful when tied to accurate physical calculations and periodic recalibration; a rapid approximate model does not replace an expensive high-fidelity solver or a physical experiment. The perspective illustrates this through multiscale simulations of polymer rheology, viscoelastic flow and processing. [P, p. 5]
-
-**Available ceramic evidence.** The source study combines DFT-related formation-energy calculations with feature engineering and machine learning. The 231 labelled records allow a retrospective relationship between **calculated reference values** and **statistical predictions** to be studied. They do not provide an authorised live DFT scheduler or an autonomous recalculation service. [C, pp. 3–8; SI; X]
-
-**Planned engineering response:**
-
-1. Preserve distinct types for `source_formation_energy_eV_atom`, `independent_prediction_eV_atom`, `prediction_residual_eV_atom` and `calculation_method`. A DFT reference remains a calculation rather than an experimental measurement.
-2. Reconcile the 231 S2/S4 reference-energy values by explicit composition identifiers and identify exceptions instead of assuming the same row order implies identity.
-3. Verify construction of **100 initial features**, the exclusion of **16 constant features plus two non-input fields**, and the resulting **82 selected feature columns**. Reconcile S2 and S3 names and numerical values.
-4. Audit feature definitions and correlations (Pearson correlation, multicollinearity, constant variables); prevent final-energy or target-derived values from entering model inputs.
-5. Apply split-aware preprocessing: any fitted transformations or learned feature selection must be fitted only on training folds during independent validation. The publisher-supplied 82-feature matrix can audit the published representation, but cannot by itself prove that a new split is leakage-free.
-6. If modelling is justified, compare transparent baselines with selected regressors (for example, linear regression, random forest and XGBoost), report **MAE, RMSE and R²** with units, and retain split membership, seed, model settings and prediction residuals.
-7. Evaluate an ordinary random split against feasible **composition-blocked or held-out Sr/La-region validation**; quantify domain-of-applicability and extrapolation limitations.
-8. Propose—without claiming execution—a future `calculation_request` record to route uncertain high-value predictions for new high-fidelity computations and record re-calibration outcomes.
-
-**Suggested outputs:** `calculation_provenance.csv`, `feature_exclusion_manifest.csv`, `feature_linkage_checks.csv`, `leakage_audit.csv`, `split_plan.json`, `ml_readiness_report.md`; conditional `benchmark_results.csv`, `prediction_audit.csv`, `model_card.md`.
-
-**Acceptance criteria:** 231 linked targets reconcile or exceptions are reported; the 82 input features contain no explicit target/final energy; no composition key crosses a train/test boundary; metrics have declared units and experimental scope; prediction uncertainty and extrapolation are communicated; no reproduced-performance claim is made before independent execution.
-
-**Research value:** a defendable bridge from physical-computation data to ML outputs, with transparent assumptions and limits.
-
-### 6.3 Section 5.1.3 — Generation (Design)
-
-**Research issue.** Candidate design must account for scientific feasibility and processability **during selection**, not only after a predictor produces an apparently favourable property. The perspective describes integrating synthesis and processing constraints into generation. [P, p. 5]
-
-**Available ceramic evidence.** S1 provides a large composition candidate space; S2/S4 supply a much smaller DFT-labelled subset; the ceramic paper uses formation-energy trends to select representative compositions and subsequently investigates specific ferroelectric, mechanical and thermal quantities. A predicted energy alone does not establish a synthesised or device-ready material. [C, pp. 2–5, 8–15; X]
-
-**Planned engineering response:**
-
-1. Validate nominal A-site substitution constraints: `x ≥ 0`, `y ≥ 0`, `x + y ≤ 1`; record valid composition-domain boundaries and their source.
-2. Preserve the observed Ti–La workbook pattern and investigate source computational encoding separately from nominal stoichiometry and any proposed physical defect model.
-3. Audit candidate descriptor completeness and compatibility with the validated feature dictionary before any model estimates are generated.
-4. Classify each candidate as `candidate_only`, `calculation_reported`, `prediction_generated`, `published_property_analysis` or `experimental_result_documented` **only with evidence**; do not promote a predicted candidate into a synthesis result.
-5. Distinguish composition validity, electrostatic/charge-compensation interpretation, relative calculated energy, phase behaviour, dielectric response and manufacturing feasibility. These are not interchangeable approval flags.
-6. If optional candidate screening is implemented, include prediction, model version, interpolation/extrapolation flag, known structural assumptions and **researcher review status**; do not publish a composite 'best material' ranking without independently defined and validated criteria.
-7. Make processability-aware screening a **future rule interface**: require verified sintering, deposition, microstructure or electrical data before claiming process-specific feasibility.
-
-**Suggested outputs:** `candidate_registry.csv`, `composition_validation.csv`, `composition_representation_review.csv`, `candidate_status.csv`, `candidate_constraints.json`; conditional `candidate_screening.csv`.
-
-**Acceptance criteria:** chemically invalid or out-of-scope entries have explicit reasons; original coefficients remain recoverable; predicted stability is not labelled experimental stability; no unobserved synthesis or performance claims appear.
-
-**Research value:** candidate records usable for disciplined hypothesis generation, rather than unsupported material claims.
-
-### 6.4 Section 5.1.4 — Synthesis, Manufacturing and Characterisation (Action and Perception)
-
-**Research issue.** The physical execution layer can remain the limiting stage. The perspective's examples—non-Newtonian liquids, viscous melts, shear and thermal histories, fouling, reactor handling and inline measurements—are process-specific. Robotic throughput alone does not guarantee reproducible material state or faithful measurement. [P, p. 5]
-
-**Available ceramic evidence.** The supplied 231 energy records are **computational records**, not traceable physical ceramic specimens, powder batches, sintering cycles, thin-film deposition runs, laboratory dielectric spectra or robotic action logs. The published article discusses calculated materials properties and selected structural models; such calculations cannot be re-labelled as experiment records. [C; X]
-
-**Planned integration specification—not a claim of laboratory operation:**
-
-1. Define future entities for `experimental_batch`, `raw_material_lot`, `specimen`, `processing_step`, `instrument_run`, `measurement`, `calibration`, `quality_event` and `failure_log`.
-2. Permit route-specific metadata where justified: precursor identity/purity; powder mixing/milling; calcination and sintering temperatures, dwell and atmosphere; heating/cooling profiles; ceramic density and porosity; phase/microstructure characterisation; thin-film deposition variables; dielectric and electrical testing conditions.
-3. Keep **intended parameters** distinct from **measured/achieved parameters**; require sample identity and timestamps before attaching physical observations.
-4. Separate identifiers for **computational composition/calc jobs** from **manufactured specimens and instrument runs**; a formula match does not prove the same sample exists.
-5. Specify future instrument-adapter inputs/outputs, units, calibration records, machine-readable protocols, exception handling and append-only action logs; include human review before an autonomous decision is accepted.
-6. Document aborted runs and negative results only when records become available. Experimental absence is an evidence gap, not a fabricated failure count.
-7. Reserve future process-history and physical-property validation fields for ceramics rather than copying polymer melt-rheology columns into an inappropriate material modality.
-
-**Suggested outputs:** `experimental_schema_proposal.md`, `instrument_event_schema.json`, `specimen_linkage_rules.md`, `measurement_metadata_template.csv`, `integration_requirements.md`.
-
-**Acceptance criteria:** no computational record acquires a physical `specimen_id` without documented evidence; future measurements require units, instrument/protocol context and provenance; all instrumentation fields remain proposals until real, authorised laboratory data are available.
-
-**Research value:** a defensible data-interface specification that can support future experimental integration, while preserving the distinction between a computational portfolio and a deployed autonomous laboratory.
-
-## 7. Section 5.2: the two limits that an automated loop cannot remove
-
-The framework's Section 5.2 begins on Page 5 and continues on Page 6; Figure 4 on Page 6 shows a fast inner loop and slower checks that re-anchor simulation and measurements. The two limits are essential **engineering constraints**, not reasons to abandon automation.
-
-### 7.1 Limit 1 — Time and slow-property validation
-
-The perspective warns that optimising short-duration proxies can miss the very long-duration properties that define practical success. It discusses time–temperature superposition (including WLF or Arrhenius treatments in restricted regimes), chemically accelerated ageing and mechanism-preserving validation. Such bridges are only defensible when their physical assumptions are checked; viscoelastic transitions, chemistry changes and nonlinear response can invalidate extrapolation. [P, pp. 5–6]
-
-**Material-specific connection:** for polymeric materials, relevant slow outcomes include creep, relaxation, degradation, recyclability retention and biological responses. For ceramic capacitors, potential future concerns include dielectric ageing, electrical fatigue, breakdown strength, thermal cycling and long-term device reliability. The supplementary formation-energy workbook **does not supply those long-horizon tests**.
-
-**Project response:**
-
-- Model a proposed `long_horizon_validation` entity with `specimen_id`, target property, stressor, protocol, actual observation duration, environmental conditions, raw time series, uncertainty and mechanistic extrapolation assumptions.
-- Distinguish direct observation, validated accelerated test, unvalidated proxy and ML extrapolation through explicit evidence status.
-- Record mechanism checks and the domain for any future accelerated ageing model; do not estimate years-long device life from a DFT formation energy or a short test.
-- Keep long-duration or physical fields absent—not imputed—when only computational reference data exist.
-
-**Current deliverable:** a documented future-data schema and evidence rule set. **Not delivered:** accelerated ageing experiments or demonstrated capacitor lifetime predictions.
-
-### 7.2 Limit 2 — Physical execution and rheological/handling constraints
-
-The perspective's second limit concerns physically handling non-dilute, process-sensitive soft matter—viscosity, viscoelasticity, yield stress, shear-induced structure, fouling and temperature dependence. Flow-rate optimisation is not the same as reproducible material synthesis. [P, pp. 5–6]
-
-A ceramic project faces **different possible physical bottlenecks**: powder flow, slurry rheology (where a slurry route applies), phase purity, sintering shrinkage, defects, thermal gradients, grain evolution, deposition conditions and batch variation. Those are **future ceramic experimental metadata requirements**, not findings in the current supplementary workbook.
-
-**Project response:** design modality-specific interfaces linking composition → process route → equipment conditions → specimen → measurement → QC decision, while keeping process histories and instrumentation identifiers out of the computational-only tables until supported by genuine records.
-
-### 7.3 Discovery-to-manufacturing, scale and safe operation
-
-Page 6 also highlights that milligram-scale screening does not establish manufacturing-scale robustness and that autonomous operation requires safety and auditable responsibility. A candidate selected by a model must survive the physics and constraints of later process scales. A future decision/action log should therefore contain the proposal, constraints checked, human approval, observed execution, error state and source measurements. This project will **specify** such fields; it will not claim industrial scale-up or safe operation of actual robotics.
-
-### 7.4 Concluding roadmap — Page 7
-
-The perspective prioritises: (1) metadata-complete, failure-inclusive scientific databases; (2) deeper study of difficult process physics; (3) faster physics-informed surrogate simulation; (4) mechanism-aware bridging to slow validation; and (5) processability-aware design. For this independent BaTiO₃ exercise, the practical sequence is **database and provenance first → scientific QC and linkage → modelling readiness → optional predictions → future process-aware evidence intake**. The expected contribution is better research decisions and auditability, **not an unsupported claim that physical material discovery has already been accelerated**.
-
-## 8. Data model, scientific integrity and evidence classification
-
-### 8.1 Core entities justified by the supplied data
-
-| Entity/table | Indicative key fields | Reason for inclusion |
+| Entity | Essential information | Scientific purpose |
 |---|---|---|
-| `source_file` and `source_row` | `source_id`, `sha256`, `worksheet`, `excel_row`, `excel_column`, `acquired_at` | Exact source-cell provenance and repeatable extraction. |
-| `composition` | `composition_id`, `Ba`, `Sr`, `La`, `Ti_tabulated`, `O`, `nominal_formula`, `source_formula` | Distinguish chemistry-level representation and the Ti/La discrepancy. |
-| `calculation` | `calculation_id`, `composition_id`, `method`, `space_group`, `energy_value`, `unit`, `source_id` | Represent S2/S4 DFT-related targets and computational context. |
-| `descriptor_dictionary` | `feature_name`, `site`, `definition`, `aggregation_rule`, `unit`, `source_ref` | Interpretable and reviewable input features. |
-| `feature_matrix` / `linkage` | `composition_id`, `feature_version`, `target_reference`, `linkage_status` | Validate the 82 features against the correct 231 targets. |
-| `qc_finding` | `finding_id`, `source_record_id`, `rule_id`, `severity`, `evidence`, `disposition` | Preserve anomalies and scientific review decisions. |
-| `model_run` (conditional) | `run_id`, `feature_version`, `split_id`, `seed`, `estimator`, `metrics` | Trace optional independent predictions. |
-| `experimental_specimen` (future only) | `specimen_id`, `batch_id`, `processing_run`, `measurement_id` | Reserved for genuine future physical records, not synthetic laboratory data. |
+| `source_record` | source ID, DOI, file hash, sheet, original cell/row, header, raw value | Trace every output back to its origin |
+| `composition` | composition ID, original Ba/Sr/La/Ti/O coefficients, nominal formula, interpretation status | Preserve chemical identity and unresolved representation questions |
+| `calculation` | calculation ID, composition ID, reported method/structure, target, value, unit, evidence status | Distinguish physical computation from prediction and experiment |
+| `descriptor_definition` | feature name, physical meaning, site, calculation/weighting rule, unit, source | Make ML inputs scientifically interpretable |
+| `feature_matrix` | composition ID, validated descriptor values, version, linkage checks | Connect correct input vectors to labelled targets |
+| `qc_finding` | rule, affected record, severity, evidence, reviewer disposition | Ensure issues are documented rather than silently removed |
+| `model_run` *(conditional)* | inputs, split, hyperparameters, random seed, metrics, residuals, model version | Reproduce independently generated predictions |
+| `experimental_record` *(future only)* | batch, specimen, processing conditions, instrument, measurement, protocol | Permit later physical validation without fabricating data |
 
-### 8.2 Quality-control principles
+### Data-quality and evidence policies
 
-- **Non-destructive:** retain raw values and source coordinates; put standardised values and diagnostic calculations in new fields.
-- **Chemistry-aware:** validate nominal A-site fractions but keep the original Ti representation under investigation; do not equate formula constraints with verified charge compensation.
-- **Calculation-aware:** preserve energy reference, normalisation, method assumptions and units (`eV/atom`); do not substitute calculated energies for experimental tests.
-- **Leakage-aware:** separate target and descriptive final-energy fields from model inputs; prevent duplicate or composition-neighbour leakage where relevant.
-- **Source-aware:** use exact keys and row-level exceptions for S2/S3/S4 joins; do not assume spreadsheet row position establishes sample identity.
-- **Failure-aware:** distinguish not evaluated, not reported, unsuccessful calculation and failed physical experiment.
-- **Evidence-aware:** keep published results, reproduced checks, independent ML estimates, hypothetical extensions and physical observations clearly labelled.
-- **Reviewer-aware:** ambiguous chemistry and method inconsistencies receive explicit review status, with no silent 'correction'.
+- Preserve the original workbook and the precise source-to-output lineage.
+- Keep **unknown, not measured, not attempted and documented failure** as distinct states.
+- Do not promote a candidate to an experimentally proven material without a traceable experiment.
+- Use units, method labels and reference definitions in every quantitative comparison.
+- Keep anomalous or chemically ambiguous records available for scientific review rather than erasing them.
+- Identify whether an artefact is **source data**, a **verified transformation**, a **statistical prediction**, an **experimental observation**, or a **future schema proposal**.
 
-### 8.3 Audit and acceptance gates
+## 7. Implementation roadmap — Phases 00–09
 
-| Gate | Required verification |
-|---|---|
-| **A — Source integrity** | Stable file hashes, version/rights manifest, source-cell traceability and immutable raw inputs. |
-| **B — Chemical representation** | A-site constraints assessed; nominal versus tabulated Ti documented and unresolved mechanism not misreported. |
-| **C — Cross-sheet linkage** | All available labelled records reconciled across S2/S3/S4 using declared keys, with numeric agreement and exceptions. |
-| **D — Descriptor legitimacy** | All 82 selected inputs defined or explicitly unresolved; target/final energy absent from predictors. |
-| **E — Evidence classes** | Candidate-only, DFT reference, ML prediction, actual documented experiment and genuine failure distinguished. |
-| **F — ML readiness** | Feature–target linkage, sample coverage, leakage controls and split design accepted before training. |
-| **G — Reproducibility** | Fresh-session rerun yields stable counts/outputs, manifest and QC report; nondeterministic steps are documented. |
-| **H — Scientific claims** | Repository results reflect work actually executed; no unverified autonomous-lab, synthesis or long-term performance claims. |
+The staged plan delivers scientific data reliability first, followed by analysis and optional machine-learning extensions. **Outputs below are planned unless explicitly identified as completed.**
 
-## 9. Implementation roadmap: Phases 00–09
+| Phase | Research purpose and implementation | Expected outputs and completion criterion |
+|---|---|---|
+| **00 — Research scope and source registry** | Register publication and supplementary file identifiers, licence status, acquisition details, SHA-256 hashes, scientific scope and evidence types. | `source_registry.csv`, `source_manifest.json`, `research_scope.md`. Files are identifiable, versioned and unaltered. |
+| **01 — Workbook and computational-data audit** | Inventory `S1`–`S4`, worksheet formulas, headers, cell types, missingness, duplicates, composition keys and shared S2/S3/S4 values; document ambiguities and initial Ti–La findings. | `workbook_inventory.csv`, `column_inventory.csv`, `source_audit_report.md`, exception log. Every observation has a source location. |
+| **02 — Scientific schema and data dictionary** | Model compositions, crystal-site information, descriptors, calculation provenance, evidence status and QC relationships. | `schema_design.md`, `data_dictionary.csv`, `descriptor_dictionary.csv`. Every curated field has semantics, unit where relevant, source and missingness policy. |
+| **03 — Chemical consistency and quality control** | Validate A-site fractions, numeric ranges, identity uniqueness, composition-representation discrepancies and target-field consistency without modifying raw data. | `composition_validation.csv`, `qc_findings.csv`, `composition_representation_review.md`. Issues are explicit and reviewable. |
+| **04 — Standardisation and feature documentation** | Produce consistent typed values, preserve original coefficients and target units, reconcile the 100-to-82 descriptor pipeline, and record all transformations. | `composition_standardised.csv`, `feature_dictionary.csv`, `feature_exclusion_manifest.csv`, `transformation_log.csv`. Source values remain recoverable. |
+| **05 — Record linkage and evidence layer** | Join S2, S3 and S4 by verified composition identities; test feature and energy equality; report missing or conflicting joins; assemble only scientifically supported records. | `linkage_summary.csv`, `linkage_exceptions.csv`, conditional `analysis_ready_evidence.csv`. No implicit row-order matching. |
+| **06 — Exploratory materials-informatics analysis** | Explore Sr/La domain coverage, labelled versus candidate populations, formation-energy distribution, descriptor correlations and chemically notable trends. | `eda_summary.md`, documented figures. All plots identify evidence class, units, sample counts and coverage limitations. |
+| **07 — ML readiness and generalisation strategy** | Test feature–target linkage, leakage, redundancy, split design, chemical-neighbour similarity and potential distribution shift. | `ml_readiness_report.md`, `leakage_audit.csv`, `split_plan.json`. Validation design and data restrictions are defensible before model training. |
+| **08 — Optional predictive modelling and screening** | Train transparent baselines and selected regressors, compare residuals under declared splits, and screen candidates only within documented descriptor and applicability constraints. | Conditional `benchmark_results.csv`, `prediction_audit.csv`, `model_card.md`, `candidate_screening.csv`. Predictions remain distinct from DFT and experimental results. |
+| **09 — Workflow engineering, testing and release** | Consolidate deterministic extraction, stable paths, scripts, dependency management, assertions, manifests and clean-run verification. | `requirements.txt`, reproducibility instructions, automated tests and `run_manifest.json`. A clean environment reproduces all declared outputs. |
 
-The phase definitions below are **implementation commitments and proposed output paths**, not claims that executable notebooks or QC datasets already exist. Each phase has an explicit scientific rationale, workflow and completion check.
+### Practical implementation sequence
 
-| Phase | Focus and intended scientific contribution | Principal deliverables | Completion gate |
-|---|---|---|---|
-| **00** | Register source/version/rights, scientific assumptions and evidence classes. | `source_registry.csv`, `source_manifest.json`, `research_scope.md` | Complete manifest and source hashes. |
-| **01** | Audit every sheet, header, original formula cell, type, duplicate and key. | `workbook_inventory.csv`, `column_inventory.csv`, `source_audit_report.md`, `qc_findings.csv` | Every reported result has source coordinates. |
-| **02** | Design canonical composition/calculation/descriptor/QC schema. | `schema_design.md`, `data_dictionary.csv`, `schema_relationships.md` | Keys, definitions, units and missingness rules documented. |
-| **03** | Validate composition constraints and numerical quality; investigate Ti encoding. | `composition_validation.csv`, `composition_representation_review.csv`, `qc_findings.csv` | No destructive fixes or undocumented mechanism assignments. |
-| **04** | Standardise composition fields, energy units and descriptors. | `composition_standardised.csv`, `feature_dictionary.csv`, `transformation_log.csv` | Source values preserved; 82-feature dictionary checked. |
-| **05** | Link S2, S3 and S4 by verified keys and build evidence layer. | `linkage_summary.csv`, `linkage_exceptions.csv`, conditional `analysis_ready_evidence.csv` | Record-level reconciliation and exceptions reproducible. |
-| **06** | Explore composition region, formation-energy distribution and descriptors. | `eda_summary.md`, `composition_space.png`, `formation_energy_distribution.png`, `feature_correlations.png` | Figures show counts, units, provenance and inference limits. |
-| **07** | Review ML readiness, leakage, split design and chemical-domain coverage. | `ml_readiness_report.md`, `leakage_audit.csv`, `split_plan.json` | Validation design justified before training. |
-| **08** | Optional reference baselines and candidate screening when justified. | `benchmark_results.csv`, `prediction_audit.csv`, `model_card.md`, conditional `candidate_screening.csv` | Predictions separated from DFT and experiments; limitations documented. |
-| **09** | Clean rerun, testing, documentation and versioned release. | `requirements.txt`, `run_manifest.json`, `validation_summary.csv`, `tests/` | Reproducible regeneration from permitted raw inputs. |
+**Immediate priority: Phases 00–01.** Establish source integrity and reproduce the preliminary structural and 231-record linkage observations in a standalone notebook or script. Subsequent stages should proceed only once source semantics and exception handling are documented. Optional modelling follows scientific validation; advanced experimental integration remains a separate future workstream.
 
-### Phase 00 — Research scope and source registry
-
-**Purpose:** guarantee that downstream data have known origin, permitted usage, unambiguous version and scientific scope. Register input file paths, publication DOI, hash, size and acquisition date; document distinction between computational reference and predicted/experimental values. **Python:** `pathlib`, `hashlib`, `json`, structured CSV writing. **Quality gate:** a clean run can verify the source file before extraction.
-
-### Phase 01 — Full source-data audit
-
-**Purpose:** move beyond preliminary sheet sizes to verified structural and scientific evidence. Inventory `S1`–`S4`, original cell addresses, types, numeric headers, formula/cached-value pairs, missingness and duplicates; map candidate versus DFT-labelled populations; re-check unique composition keys and S2/S3/S4 values; document Ti/La issues without 'repairing' them. **Python:** auditable workbook reads, structured extraction and report generation. **Quality gate:** another researcher can trace each reported count and exception back to an original cell.
-
-### Phase 02 — Scientific schema and dictionary
-
-**Purpose:** represent composition, calculation, feature definition and QC as linked scientific objects. Define A-/B-site semantics, DFT target reference, method evidence and required versus optional metadata. **Python:** typed schema validation with versioned dictionaries and stable IDs. **Quality gate:** every curated field has a defined meaning, provenance and missingness rule.
-
-### Phase 03 — Composition validation and scientific QC
-
-**Purpose:** distinguish data anomalies from physically meaningful computational conventions. Validate bounds, key uniqueness, numeric plausibility and composition constraints; preserve Ti/La discrepancy as an unresolved interpretative item. **Python:** declarative tests, exception registers and review dispositions. **Quality gate:** every issue has evidence, severity and non-destructive treatment.
-
-### Phase 04 — Standardisation and feature documentation
-
-**Purpose:** make verified source features consistent and analysis-ready without losing meaning. Record formula representations, feature weighting, descriptor sites, type conversions and `eV/atom` target units; reconcile 100 source features versus 82 model inputs. **Python:** deterministic transformations, feature dictionary and exclusion manifest. **Quality gate:** all transformations can be traced and reversed or reconstructed.
-
-### Phase 05 — Provenance and reliable record linkage
-
-**Purpose:** ensure each modelling row connects to the correct calculated target. Match S2/S3/S4 via scientific keys, compare shared features and energies, quantify unmatched records and duplicate conflicts; emit evidence tables only after linkage passes. **Python:** explicit joins, validation assertions and source-to-output lineage. **Quality gate:** no row-order-only joins; full exception report.
-
-### Phase 06 — Exploratory materials-informatics analysis
-
-**Purpose:** understand the observed chemical domain before modelling. Examine Sr/La distributions, energies, descriptor correlation structure, data density and outliers; connect interpretation to source calculation conditions. **Python:** NumPy, scientific tabular summaries, Matplotlib. **Quality gate:** every figure reports provenance, sample count, unit and interpretation limits.
-
-### Phase 07 — Machine-learning readiness
-
-**Purpose:** decide whether 231 reference values support a valid predictive experiment and what generalisation can be claimed. Assess label alignment, leakage and redundancy, restricted chemical coverage, near-neighbours and random versus blocked validation. **Python:** split manifests and leakage tests. **Quality gate:** split plan pre-specified and data-derived operations confined to training folds.
-
-### Phase 08 — Optional regression and screening
-
-**Purpose:** independently benchmark formation-energy prediction where justified. Compare suitable baselines and selected published model families, report MAE/RMSE/R² and residual patterns under documented splits; apply models to candidates only with compatible descriptors and domain checks. **Python:** scikit-learn and optional XGBoost/SHAP. **Quality gate:** no unsupported claims of reproducing published metrics or validated experimental performance.
-
-### Phase 09 — Workflow engineering and reproducibility
-
-**Purpose:** make the whole process restart-safe and independently auditable. Use relative paths, pinned dependency versions, deterministic outputs where feasible, versioned configuration, automated assertions, run manifests and documented exceptions. **Python:** modular scripts/tests and clean Jupyter execution. **Quality gate:** an independent clean run regenerates the declared output evidence.
-
-## 10. Quality gates, reproducibility and repository structure
-
-### Planned repository layout
+## 8. Planned repository structure
 
 ```text
 Project_Machine_learning_and_first-principles_guided_desig/
 ├── README.md
-├── requirements.txt                    # Created after actual dependency verification
-├── .gitignore                          # Exclude restricted raw data / transient files
-├── data/
-│   ├── raw/                             # Local only until rights are verified
-│   ├── interim/                         # Intermediate, provenance-preserving outputs
-│   └── processed/                       # Validated and redistributable outputs only
+├── .gitignore
+├── requirements.txt                 # Finalise against executed code
 ├── notebooks/
 │   ├── 00_scope_and_source_registry.ipynb
 │   ├── 01_source_data_audit.ipynb
@@ -430,12 +275,16 @@ Project_Machine_learning_and_first-principles_guided_desig/
 │   ├── 07_ml_readiness_and_leakage_audit.ipynb
 │   ├── 08_optional_ml_benchmarks_and_screening.ipynb
 │   └── 09_reproducibility_and_release.ipynb
-├── src/                                  # Reusable extract/validate/link functions
+├── src/                             # Reusable, tested extraction and QC logic
+├── data/
+│   ├── raw/                         # Local source files; excluded from Git until rights verified
+│   ├── interim/                     # Audited working records
+│   └── processed/                   # Permissible, validated derived outputs
 ├── docs/
 │   ├── data_dictionary.csv
 │   ├── schema_design.md
-│   ├── composition_representation_review.md
-│   └── source_and_method_notes.md
+│   ├── descriptor_dictionary.csv
+│   └── composition_representation_review.md
 ├── reports/
 │   ├── qc/
 │   └── figures/
@@ -444,55 +293,56 @@ Project_Machine_learning_and_first-principles_guided_desig/
 └── tests/
 ```
 
-This tree represents the **intended structure**. Notebooks and files will be added as completed work warrants; an empty folder listing is not evidence of an implemented pipeline.
+The directory tree is a **target structure**, not a claim that these notebooks and files are already implemented. Each artefact will be added as its corresponding phase is completed.
 
-### Execution standards
+## 9. Reproducibility, scientific limitations and responsible reuse
 
-- Keep original source inputs immutable and use hashes to detect source changes.
-- Use explicit, validated schema and join keys; retain original cell coordinates.
-- Record versions of Python, installed packages, code and configuration in each completed phase.
-- Make output directories deterministic and avoid manual notebook-state dependencies.
-- Produce both machine-readable QC findings and a concise human-readable scientific interpretation.
-- Define pass/fail criteria before running a test; preserve findings that require expert review.
-- Recompute every published summary from controlled scripts and document any unreproducible source claims.
-- Keep the original sources and published results clearly distinct from independently generated analyses.
+### Reproducibility standards
 
-## 11. Expected research contribution, boundaries and next steps
+- Use an immutable raw-data copy and source hashes, with no manual edits to publisher files.
+- Capture original spreadsheet coordinates and source versions in all derived tables.
+- Apply deterministic transformations and versioned schemas; distinguish source data from generated outputs.
+- Record Python/package versions, random seeds, split membership, configuration and model settings where relevant.
+- Make validation failures visible in both machine-readable logs and concise scientific reports.
+- Confirm that each published summary and figure can be regenerated from controlled inputs.
+- Require independent review for unresolved chemical interpretations, unexpected data patterns and extrapolative model claims.
 
-### Demonstrable contributions after implementation
+### Scope and evidence limitations
 
-A completed project should provide:
+The available materials support a substantial **computational data-curation and workflow-engineering project**. They do **not** alone demonstrate that the proposed ceramics were synthesised, that a self-driving laboratory was operated, that any particular calculation or experiment failed, or that long-term dielectric performance was measured. Proposed experimental schemas, instrument integrations and model-driven calculation requests are **design specifications**, not operational results.
 
-- **A provenance-complete computational materials register** connecting source files and cells with compositions, DFT-related calculation records and descriptors.
-- **Chemistry-aware validation** addressing A-site substitution constraints, uncertain Ti/La representation and scientific units without overwriting data.
-- **Verified S2–S3–S4 record linkage**, with record-level exceptions and target/feature lineage.
-- **Scientific-data quality assessment** covering missingness, duplicates, feature meaning, evidence class, correlation and leakage risk.
-- **Reproducible workflow execution** with manifests, data dictionaries, tests, QC reports and independently auditable transformations.
-- **Conditional ML-readiness and regression studies**, with composition-domain limitations and explicit prediction versus reference status.
-- **Future-ready interfaces** for calculation requests, failures, experimental provenance and long-horizon validation, carefully identified as specifications rather than operational systems.
+A DFT-based formation-energy workflow may help organise candidate research, but it does not replace **phase and defect analysis, controlled processing, physical characterisation, durability testing or deployment validation**. These steps require appropriate additional data and experimental work.
 
-### Boundaries of current evidence
+### Research attribution and data rights
 
-The public supplemental workbook does **not**, by itself, establish actual ceramic synthesis, a running self-driving laboratory, physical robot integration, experimentally measured electrical reliability, independently documented DFT job failures or real long-term ageing outcomes. Nor can computational formation-energy screening alone resolve the polymer perspective's handling and long-horizon testing limitations. Any such activities would require new data, experimental infrastructure and separate validation.
+The research publications, calculations, figures and supplementary files remain attributable to their original contributors and rights holders, identified in the linked journal records. The ceramic article is described as **CC BY 4.0 except where otherwise noted**; supplementary data may have distinct terms. Before redistributing any original workbook, figure or substantial source extract, the applicable licence and permissions must be verified. The repository should otherwise link to the official sources and publish independently written code, documentation and permissible derived outputs.
 
-### Current versus planned work
+This is an **independent research and professional portfolio project**, not an institutional research appointment, official collaboration, endorsement or claim of access to private laboratory systems.
 
-| Workstream | Status as of 4 November 2026 |
+## 10. Current status and next milestone
+
+| Workstream | Status — 4 November 2026 |
 |---|---|
-| Main article and supplementary documentation review | **Completed for research scoping** |
-| Preliminary S1–S4 structural inventory and 231-record cross-sheet comparison | **Preliminary checks completed; reproducible public Phase 01 audit pending** |
-| Ti–La composition discrepancy identified | **Flagged for scientific review; not resolved** |
-| Source registry, manifest and complete automated audit notebooks | **Planned** |
-| Canonical schema, comprehensive QC and verified data exports | **Planned** |
-| ML leakage audit, independent modelling and candidate screening | **Conditional / planned** |
-| Actual synthesis, robotic integration and long-term physical tests | **Outside current scope** |
+| Main ceramic paper, supplementary information and research-framework review | **Reviewed for project scoping** |
+| S1–S4 sheet inventory and preliminary 231-record cross-sheet comparisons | **Preliminary checks performed; public reproducible audit pending** |
+| Ti–La composition representation question | **Identified and retained for scientific review** |
+| Phase 00 source registry and Phase 01 complete automated QC | **Planned** |
+| Canonical schema, full chemical validation, standardised exports and evidence layer | **Planned** |
+| Independent ML validation, benchmarking and candidate screening | **Conditional; not yet executed** |
+| Experimental processing, robotics and long-term performance validation | **Outside the present dataset and project scope** |
 
-**Immediate next milestone:** implement Phases **00 and 01**, beginning with a source manifest, full workbook audit, explicit 231-record S2/S3/S4 linkage tests and a documented chemical-interpretation findings register. Advance to data standardisation and modelling only when those gates have been met.
+**Next milestone:** create the source manifest and Phase 01 executable audit, reproduce the workbook inventory and explicit S2/S3/S4 consistency checks, and publish a transparent findings register before beginning data standardisation or predictive modelling.
 
-## 12. References and research independence
+---
 
-- **[C]** **Machine learning and first-principles guided design of BaTiO₃-based materials for capacitor applications**. *Journal of Applied Physics* **139**, 064101 (2026). [https://doi.org/10.1063/5.0314819](https://doi.org/10.1063/5.0314819).
-- **[SI, X]** Official supplementary information and research workbook associated with [C]. [https://doi.org/10.60893/figshare.jap.c.8234602](https://doi.org/10.60893/figshare.jap.c.8234602).
-- **[P]** **Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery**. *Macromolecular Rapid Communications* (2026). [https://doi.org/10.1002/marc.70420](https://doi.org/10.1002/marc.70420). Particularly Section 5.1 (p. 5), Section 5.2 (pp. 5–6), Figures 1–4, and the concluding roadmap (p. 7).
+## References
 
-**Attribution and independence.** The original research, calculations, interpretations and supplementary datasets remain attributable to their respective authors and rights holders, as identified in the linked publisher records. This repository documents an **independent educational and professional materials-data engineering project**. It does not claim an official institutional collaboration, a research appointment, endorsement, access to internal laboratory systems or authorship of the original studies. Original datasets and copyrighted publisher graphics will be linked or reused only in accordance with applicable licensing and permissions.
+**Primary ceramic research and computational dataset**  
+**[*Machine learning and first-principles guided design of BaTiO₃-based materials for capacitor applications*](https://doi.org/10.1063/5.0314819)**. *Journal of Applied Physics* **139**, 064101 (2026).  
+[Official supplementary materials and datasets](https://doi.org/10.60893/figshare.jap.c.8234602).
+
+**Research framework for trustworthy and process-aware materials discovery**  
+**[*Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery*](https://doi.org/10.1002/marc.70420)**. *Macromolecular Rapid Communications* (2026).
+
+*Full publication metadata and complete author lists are provided by the original journal DOI records.*
+
