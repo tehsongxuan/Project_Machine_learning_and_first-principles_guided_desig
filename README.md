@@ -4,7 +4,7 @@
 
 **Material system:** Sr/La-substituted barium titanate, nominally `(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`  
 **Research methods:** Solid-state chemistry · First-principles calculations · Scientific data curation · Data engineering · Machine-learning validation · Reproducible Python workflows  
-**Project status (4 November 2026):** Source documents acquired and preliminary workbook and cross-sheet checks undertaken; executable phase notebooks, comprehensive QC and independent modelling are not yet complete.
+**Project status ** Source documents acquired and preliminary workbook and cross-sheet checks undertaken; executable phase notebooks, comprehensive QC and independent modelling are not yet complete.
 
 ## Research foundation
 
