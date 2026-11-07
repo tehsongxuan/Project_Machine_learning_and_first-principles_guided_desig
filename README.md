@@ -8,6 +8,8 @@ The following links use repository-relative paths. The notebook and HTML links b
 - [Phase 00 — research scope and implementation roadmap](#7-implementation-roadmap--phases-0009)
 - [Phase 00 — executable Jupyter notebook](BaTiO3_Phase00.ipynb)
 - [Phase 00 — scientific HTML report](BaTiO3_Phase00.html)
+- [View Phase 00 HTML report in a browser](https://htmlpreview.github.io/?https://github.com/tehsongxuan/Project_Machine_learning_and_first-principles_guided_desig/blob/main/BaTiO3_Phase00.html)
+- [Phase 00 — scientific figures and source-register links](#phase-00--scientific-figures-and-source-register-links)
 
 ---
 
@@ -401,5 +403,16 @@ Files may be placed together in the `BaTiO3_Phase00/` directory or in the notebo
 **Execution boundary:** Phase 00 performs file discovery, byte-level SHA-256 identification and basic PDF/Office-container integrity checks. These checks do not establish the validity of the DFT calculations, numerical composition records, formation-energy definitions, feature linkage or machine-learning generalisation. The associated scientific audits are addressed in later phases.
 
 **Historical status note:** The original status statements dated 4 November 2026 above are preserved verbatim as a dated project snapshot; this added source index does not retroactively change those statements.
+
+
+## Phase 00 — scientific figures and source-register links
+
+- [Phase 00 — Jupyter notebook and scientific explanations](BaTiO3_Phase00.ipynb)
+- [Phase 00 — HTML report (including any embedded visual material)](BaTiO3_Phase00.html)
+- [Phase 00 — source registry CSV](manifests/source_registry.csv)
+- [Phase 00 — source manifest JSON](manifests/source_manifest.json)
+- [Original article, supplementary-data links and source-file map](#additional-direct-source-urls-and-phase-00-source-file-map-8-november-2026)
+
+The notebook and HTML links require the corresponding files to be committed at the repository root. The CSV and JSON links require `manifests/source_registry.csv` and `manifests/source_manifest.json` to be committed in the `manifests/` directory. Phase 00 is a source-provenance workflow; standalone exploratory scientific figures are planned for Phase 06 and are not claimed as Phase 00 outputs.
 
 
