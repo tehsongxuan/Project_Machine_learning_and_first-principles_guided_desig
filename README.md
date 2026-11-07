@@ -4,7 +4,7 @@
 
 **Material system:** Sr/La-substituted barium titanate, nominally `(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`  
 **Research methods:** Solid-state chemistry · First-principles calculations · Scientific data curation · Data engineering · Machine-learning validation · Reproducible Python workflows  
-**Project status ** Source documents acquired and preliminary workbook and cross-sheet checks undertaken; executable phase notebooks, comprehensive QC and independent modelling are not yet complete.
+**Project status (4 November 2026):** Source documents acquired and preliminary workbook and cross-sheet checks undertaken; executable phase notebooks, comprehensive QC and independent modelling are not yet complete.
 
 ## Research foundation
 
@@ -345,4 +345,49 @@ This is an **independent research and professional portfolio project**, not an i
 **[*Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery*](https://doi.org/10.1002/marc.70420)**. *Macromolecular Rapid Communications* (2026).
 
 *Full publication metadata and complete author lists are provided by the original journal DOI records.*
+
+---
+
+## Additional direct source URLs and Phase 00 source-file map (8 November 2026)
+
+The links below provide a single, directly accessible source index in the same style as a dataset-led research README. The primary materials source for this project is the publisher-associated BaTiO₃ supplementary collection, **not** the Zenodo thermoresponsive-hydrogel dataset. Source links are for attribution and acquisition; the published scientific files are preserved locally without modification.
+
+### Primary BaTiO₃ publication
+
+- **Publication:** [Machine learning and first-principles guided design of BaTiO₃-based materials for capacitor applications](https://doi.org/10.1063/5.0314819)
+- **Publication DOI / persistent URL:** https://doi.org/10.1063/5.0314819
+- **Scientific purpose:** Original ceramic study, Sr/La composition space, VCA/DFT methodology, target formation energies, feature selection and machine-learning context.
+- **Local source file for Phase 00:** `Machine_Learning_First_Principles_Guided_Design_BaTiO3.pdf` (download counters such as `(1)` may appear before `.pdf`).
+
+### Publisher-hosted supplementary information and computational dataset
+
+- **Supplementary collection:** [AIP Publishing / Figshare supplementary materials](https://doi.org/10.60893/figshare.jap.c.8234602)
+- **Supplementary collection DOI / persistent URL:** https://doi.org/10.60893/figshare.jap.c.8234602
+- **Local supplementary-methods file for Phase 00:** `Supplementary information.docx` (a numbered download variant such as `Supplementary information(2).docx` is accepted).
+- **Local primary-workbook file for Phase 00:** `Supplementary Dataset.xlsx` (a numbered download variant such as `Supplementary Dataset(2).xlsx` is accepted).
+- **Scientific purpose:** Published calculation descriptions, descriptor information and workbook sheets `S1`–`S4`.
+- **Source limitations:** The collection DOI is a landing-page link; individual binary-file download URLs are not asserted here without direct publisher confirmation. The file-level licence and redistribution terms remain subject to verification.
+
+### Related research perspective — scientific context, not a BaTiO₃ dataset
+
+- **Publication:** [Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery](https://doi.org/10.1002/marc.70420)
+- **Publication DOI / persistent URL:** https://doi.org/10.1002/marc.70420
+- **Scientific purpose:** Conceptual motivation for traceable data, process-aware research representations and credible experimental validation. It is not the source of the BaTiO₃ numerical training data.
+
+### Phase 00 notebook and local source registration
+
+| File | Role | Needed to execute Phase 00? | Included in Phase 00 source registry? |
+|---|---|---|---|
+| `BaTiO3_Phase00.ipynb` | Executable source-registration and integrity-checking notebook | **Yes** | No; the notebook is the executable workflow |
+| `Machine_Learning_First_Principles_Guided_Design_BaTiO3.pdf` | Primary scientific publication | **Yes** | Yes — required `SRC-001` |
+| `Supplementary information.docx` | Methods and supplementary definitions | **Yes** | Yes — required `SRC-002` |
+| `Supplementary Dataset.xlsx` | Published computational sheets S1–S4 | **Yes** | Yes — required `SRC-003` |
+| `READ ME2(2).txt` | Project scope and research roadmap | No — optional | Yes — optional `SRC-004` when present under a recognised name |
+| `Pasted markdown.md` | Additional project documentation | No — optional | Yes — optional `SRC-005` when present |
+
+Files may be placed together in the `BaTiO3_Phase00/` directory or in the notebook's supported `data/raw/` layout. The notebook's filename matching accommodates trailing download counters such as `(1)` and `(2)`. The exported `.html` notebook, separate `.py` file, generated `source_registry.csv`, `source_manifest.json`, `research_scope.md` and `registration_findings.md` are **not** additional required inputs.
+
+**Execution boundary:** Phase 00 performs file discovery, byte-level SHA-256 identification and basic PDF/Office-container integrity checks. These checks do not establish the validity of the DFT calculations, numerical composition records, formation-energy definitions, feature linkage or machine-learning generalisation. The associated scientific audits are addressed in later phases.
+
+**Historical status note:** The original status statements dated 4 November 2026 above are preserved verbatim as a dated project snapshot; this added source index does not retroactively change those statements.
 
