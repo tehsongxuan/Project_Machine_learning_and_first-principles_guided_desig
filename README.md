@@ -1,5 +1,16 @@
 # BaTiO₃ Materials Data Curation and AI-Ready Workflow Engineering
 
+## Quick navigation — Phase 00 publication
+
+The following links use repository-relative paths. The notebook and HTML links become accessible after the corresponding files are committed alongside `README.md` at the repository root.
+
+- [Repository home](./)
+- [Phase 00 — research scope and implementation roadmap](#7-implementation-roadmap--phases-0009)
+- [Phase 00 — executable Jupyter notebook](BaTiO3_Phase00.ipynb)
+- [Phase 00 — scientific HTML report](BaTiO3_Phase00.html)
+
+---
+
 **An independent research-data engineering project for reproducible, chemistry-aware materials informatics**
 
 **Material system:** Sr/La-substituted barium titanate, nominally `(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`  
@@ -390,4 +401,5 @@ Files may be placed together in the `BaTiO3_Phase00/` directory or in the notebo
 **Execution boundary:** Phase 00 performs file discovery, byte-level SHA-256 identification and basic PDF/Office-container integrity checks. These checks do not establish the validity of the DFT calculations, numerical composition records, formation-energy definitions, feature linkage or machine-learning generalisation. The associated scientific audits are addressed in later phases.
 
 **Historical status note:** The original status statements dated 4 November 2026 above are preserved verbatim as a dated project snapshot; this added source index does not retroactively change those statements.
+
 
