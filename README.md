@@ -2,7 +2,7 @@
 
 ## Quick navigation — Phase 00 publication
 
-The following Phase 00 artefacts are published in the repository. Links are relative to the `main` branch and use the current file paths. **Phase 00 covers source registration and evidence boundaries; the Phase 01 workbook audit has not yet been completed.** The original 4 November 2026 status further below is retained as a dated historical snapshot.
+The following Phase 00 artefacts are published in the repository. Links are relative to the `main` branch and use the current file paths. **Phase 00 covers source registration and evidence boundaries; the Phase 01 workbook audit has not yet been completed.**
 
 - [Repository home](./)
 - [Phase 00 — executable Jupyter notebook](./BaTiO3_Phase00.ipynb)
@@ -22,7 +22,7 @@ The following Phase 00 artefacts are published in the repository. Links are rela
 
 **Material system:** Sr/La-substituted barium titanate, nominally `(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`  
 **Research methods:** Solid-state chemistry · First-principles calculations · Scientific data curation · Data engineering · Machine-learning validation · Reproducible Python workflows  
-**Project status (4 November 2026):** Source documents acquired and preliminary workbook and cross-sheet checks undertaken; executable phase notebooks, comprehensive QC and independent modelling are not yet complete.
+**Project status:** Phase 00 source registration, integrity checks and research-scope documentation are complete. Preliminary workbook and cross-sheet observations have been recorded. The comprehensive Phase 01 workbook audit, chemical validation and independent modelling remain outside the completed Phase 00 scope.
 
 ## Research foundation
 
@@ -256,7 +256,7 @@ No link is created merely because two records occupy the same row number or have
 
 ## 7. Implementation roadmap — Phases 00–09
 
-The staged plan delivers scientific data reliability first, followed by analysis and optional machine-learning extensions. **Outputs below are planned unless explicitly identified as completed.**
+The staged plan delivers scientific data reliability first, followed by analysis and optional machine-learning extensions. **Phase 00 outputs are published above; the remaining phases and outputs are planned unless explicitly identified as completed.**
 
 | Phase | Research purpose and implementation | Expected outputs and completion criterion |
 |---|---|---|
@@ -339,17 +339,18 @@ This is an **independent research and professional portfolio project**, not an i
 
 ## 10. Current status and next milestone
 
-| Workstream | Status — 4 November 2026 |
+| Workstream | Current status |
 |---|---|
 | Main ceramic paper, supplementary information and research-framework review | **Reviewed for project scoping** |
 | S1–S4 sheet inventory and preliminary 231-record cross-sheet comparisons | **Preliminary checks performed; public reproducible audit pending** |
 | Ti–La composition representation question | **Identified and retained for scientific review** |
-| Phase 00 source registry and Phase 01 complete automated QC | **Planned** |
+| Phase 00 source registry, manifest, research scope and registration findings | **Completed and published** |
+| Phase 01 workbook audit and automated QC | **Planned; not yet executed** |
 | Canonical schema, full chemical validation, standardised exports and evidence layer | **Planned** |
 | Independent ML validation, benchmarking and candidate screening | **Conditional; not yet executed** |
 | Experimental processing, robotics and long-term performance validation | **Outside the present dataset and project scope** |
 
-**Next milestone:** create the source manifest and Phase 01 executable audit, reproduce the workbook inventory and explicit S2/S3/S4 consistency checks, and publish a transparent findings register before beginning data standardisation or predictive modelling.
+**Next milestone:** develop the Phase 01 executable workbook audit, reproduce the S1–S4 workbook inventory and explicit S2/S3/S4 consistency checks, and publish a transparent findings register before beginning data standardisation or predictive modelling.
 
 ---
 
