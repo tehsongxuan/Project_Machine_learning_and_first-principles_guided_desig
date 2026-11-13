@@ -1,8 +1,8 @@
 # BaTiO₃ Materials Data Curation and AI-Ready Workflow Engineering
 
-## Quick navigation — Phase 00 publication
+## Quick navigation — completed Phases 00 and 01
 
-The following Phase 00 artefacts are published in the repository. Links are relative to the `main` branch and use the current file paths. **Phase 00 covers source registration and evidence boundaries; the Phase 01 workbook audit has not yet been completed.**
+Phase 00 source-registration artefacts are published in this repository. **The Phase 01 S1–S4 computational-workbook audit has also completed successfully** (`COMPLETED_WITH_REVIEW_ITEMS`); its publication files are prepared for upload. Links are relative to this README and become live as the corresponding files are committed to the `main` branch.
 
 - [Repository home](./)
 - [Phase 00 — executable Jupyter notebook](./BaTiO3_Phase00.ipynb)
@@ -12,9 +12,23 @@ The following Phase 00 artefacts are published in the repository. Links are rela
 - [Phase 00 — source registry (CSV)](./manifests/source_registry.csv)
 - [Phase 00 — source manifest (JSON)](./manifests/source_manifest.json)
 - [Phase 00 — registration findings](./reports/registration_findings.md)
+
+### Phase 01 — Computational workbook audit (completed; publication prepared)
+
+- [Phase 01 — executed Jupyter notebook](./BaTiO3_Phase01.ipynb)
+- [Phase 01 — executed scientific HTML report](./BaTiO3_Phase01.html)
+- [Phase 01 — source audit findings and scientific review priorities](./reports/phase01/source_audit_report.md)
+- [Phase 01 — worksheet inventory (CSV)](./reports/phase01/workbook_inventory.csv)
+- [Phase 01 — column inventory and source headings (CSV)](./reports/phase01/column_inventory.csv)
+- [Phase 01 — Excel-formula inventory (CSV)](./reports/phase01/formula_inventory.csv)
+- [Phase 01 — cross-sheet checks (CSV)](./reports/phase01/cross_sheet_checks.csv)
+- [Phase 01 — quality-control findings (CSV)](./reports/phase01/qc_findings.csv)
+
+The CSV/Markdown reports above are *generated audit metadata*, not the underlying spreadsheet. Verify their specific contents and source-data reuse terms before public upload, especially the column-heading inventory. **The linked Phase 01 files have not been assumed to be on GitHub until they are actually uploaded.**
+
 - [Project implementation roadmap — Phases 00–09](#7-implementation-roadmap--phases-0009)
 
-**Publication scope:** The notebook and outputs document provenance checks, file integrity and the boundary between registration and scientific validation. They do not establish that the DFT calculations, composition encodings or predictive models are independently validated. The original supplementary PDF, DOCX and XLSX files are intentionally not re-hosted here; they are linked to their official publisher sources in the research-foundation and source-data sections below. The external HTML preview is a third-party service, and will display correctly only if the uploaded HTML is a valid rendered export.
+**Publication scope:** Phase 00 documents source registration and evidence boundaries; Phase 01 provides a read-only, reproducible audit of the published S1–S4 workbook. Neither phase independently reproduces the DFT calculations, establishes a physical vacancy mechanism, trains a new predictive model or demonstrates experimental capacitor performance. The original research PDF, supplementary DOCX and source XLSX are **not re-hosted**: readers should obtain them from the official publisher (links below). The external Phase 00 HTML preview is hosted by a third-party service; visit it only if comfortable with the service's terms and privacy practices.
 
 ---
 
@@ -22,7 +36,56 @@ The following Phase 00 artefacts are published in the repository. Links are rela
 
 **Material system:** Sr/La-substituted barium titanate, nominally `(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃`  
 **Research methods:** Solid-state chemistry · First-principles calculations · Scientific data curation · Data engineering · Machine-learning validation · Reproducible Python workflows  
-**Project status:** Phase 00 source registration, integrity checks and research-scope documentation are complete. Preliminary workbook and cross-sheet observations have been recorded. The comprehensive Phase 01 workbook audit, chemical validation and independent modelling remain outside the completed Phase 00 scope.
+**Project status:** Phase 00 source registration, integrity checks and research-scope documentation are complete and published. **Phase 01 workbook auditing and automated source-data QC have been completed** with open scientific review items; GitHub publication files are prepared. The comprehensive scientific schema, independent DFT reproduction, model development and experimental validation remain outside the completed scope.
+
+## Phase 01 — Verified workbook audit and actionable findings
+
+### Audit scope and execution
+
+The Phase 01 Python workflow audits the publisher's `S1`–`S4` Excel worksheets **without modifying the workbook**. It checks file discovery and integrity, inventories worksheet/column/formula structure, matches compositions across sheets, compares declared shared descriptors and energies, and records scientific exceptions with actions. It uses explicit composition identifiers rather than assuming that identical row positions mean identical materials.
+
+The notebook applies eight practical workflow principles: **clarity**, **simplicity**, **reproducibility**, **user-friendly instructions**, **error handling**, **scientific transparency**, **validation/testing**, and **actionable outputs**. Each issue is recorded as evidence for review, not silently rewritten.
+
+The successful local run reported **`COMPLETED_WITH_REVIEW_ITEMS`** and **23 passing engineering checks**. This means the requested structural checks ran successfully; it does **not** mean that the source paper's DFT models, ferroelectric properties or experiments have been independently validated.
+
+| Audit item | Verified Phase 01 result |
+|---|---:|
+| `S1` candidate-composition rows | 30,301 (100 columns) |
+| `S2` DFT-labelled records | 231 (102 columns) |
+| `S3` retained-feature records | 231 (82 columns) |
+| `S4` computational method/energy records | 231 (10 columns) |
+| Composition identity discrepancies across `S2`, `S3`, `S4` | 0 |
+| Declared `S2`–`S3` descriptor-value mismatches | 0 of 18,018 comparisons (78 shared fields × 231 records) |
+| Declared `S2`–`S4` energy-value mismatches | 0 of 462 comparisons (2 fields × 231 records) |
+| `S2` labelled compositions exactly appearing in `S1` | 21 of 231 |
+| Labelled compositions with tabulated `Ti < 1` | 210 of 231 |
+| Records following the tabulated `Ti = 1 − La/2` relationship | 231 of 231 |
+| A-site sum (`Ba + Sr + La ≈ 1`) violations in `S2` | 0 of 231 |
+
+### Scientific interpretation and review decisions
+
+**Open item 1 — Design-space coverage.** Under exact Ba/Sr/La/Ti-key matching, **210 of the 231 labelled `S2` compositions are absent from `S1`**. This may reflect the design and selection of the publisher's candidate space; it is **not** evidence that the DFT results were wrong. **Next action:** consult the article's candidate-generation method and supplementary information before interpreting the populations or combining them for modelling.
+
+**Open item 2 — Ti–La representation.** The published coefficients follow `Ti = 1 − La/2`; 210 labelled entries have tabulated Ti below 1. These are observed **data representation patterns**, not proof of real titanium vacancies. **Next action:** reconcile the spreadsheet convention with the reported virtual crystal approximation (VCA), nominal formula and charge-accounting assumptions while preserving all original source values.
+
+The audit supports source consistency checks, not full phase-specific chemical validation, leakage testing, independent machine-learning benchmarking or experimental validation. These are separate downstream workstreams.
+
+### Reproduce the audit
+
+1. Obtain the **supplementary Excel workbook** from the [publisher's supplementary collection](https://doi.org/10.60893/figshare.jap.c.8234602); do not expect the source XLSX to be stored in this repository.
+2. Download [`BaTiO3_Phase01.ipynb`](./BaTiO3_Phase01.ipynb) and place it in the same working directory as `Supplementary Dataset.xlsx` (or a supported numbered filename variant).
+3. In JupyterLab, select a Python 3 kernel with the packages required by the notebook. The project was run using the dedicated **Python (BaTiO3 Phase00)** environment. Follow the notebook's setup instructions and input-location checks.
+4. Choose **Restart Kernel and Run All Cells**. Confirm the final audit status and inspect the six generated files in `phase01_outputs/`. A missing or ambiguous workbook should produce a **not-completed** status, not a success claim.
+5. Compare new findings with the [audit report](./reports/phase01/source_audit_report.md) and [cross-sheet summary](./reports/phase01/cross_sheet_checks.csv) before carrying results into Phase 02.
+
+### Publication, privacy and research-data rights
+
+- **Designed for GitHub:** independently authored notebook code, a public-safe rendered HTML export, aggregate worksheet/QC results, an authored scientific interpretation report and metadata inventories **after a content and licence review**.
+- **Keep local or link to the publisher:** original research PDF, supplementary Word document and original Excel workbook; individual unpublished source-value rows or extensive copied tables; local usernames, absolute Windows paths, credentials and temporary Jupyter files.
+- **Review before upload:** `column_inventory.csv` reproduces publisher column headings, and other outputs carry source-derived metadata. Confirm the applicable supplementary-dataset permissions and reuse conditions; a separate licence is **not** assumed merely from the article being open access. Check all outputs for personal identifiers and absolute paths.
+- **Attribution:** the research papers and original computational dataset belong to their cited authors/rights holders. The code and independently written annotations here are part of a personal research portfolio, **not an A*STAR collaboration or institutional endorsement**.
+
+---
 
 ## Research foundation
 
@@ -89,9 +152,9 @@ Formation energy will be curated using its reported definition and **eV/atom** u
 | Supplementary Excel workbook, sheets `S1`–`S4` | Primary composition, descriptor and calculated-energy records for curation | [Publisher supplementary collection](https://doi.org/10.60893/figshare.jap.c.8234602) |
 | Autonomous soft-matter discovery perspective | Research questions concerning information quality, physical reasoning, constrained design, processing and long-term validation | [Perspective DOI](https://doi.org/10.1002/marc.70420) |
 
-### Preliminary workbook inventory
+### Phase 01-verified workbook inventory
 
-The following findings originate from an **initial inspection** of the supplied workbook, not yet from the complete, publicly executable audit planned for Phases 00–01.
+The following worksheet dimensions were recorded during initial inspection and **reconfirmed by the completed Phase 01 executable workbook audit**. This is structural verification, not independent reproduction of the published first-principles calculations.
 
 | Worksheet | Data rows | Columns | Preliminary interpretation |
 |---|---:|---:|---|
@@ -100,7 +163,7 @@ The following findings originate from an **initial inspection** of the supplied 
 | `S3` | **231** | 82 | Retained machine-learning input descriptors |
 | `S4` | **231** | 10 | Composition, reported calculation method and structure labels, and energy records |
 
-Initial checks indicate **231 unique composition keys** in each of `S2`, `S3` and `S4`, with compatible composition identities; shared `S2`/`S3` feature values and the `S2`/`S4` reported energy values agree in the preliminary comparisons. No empty cells in the inspected populated ranges or exact duplicate complete records were found. These are **structural observations**, not proof of DFT convergence, physical validity or model generalisation. They will be independently reproduced, logged and exposed to inspection in the implementation.
+The executed Phase 01 audit confirms **231 unique composition keys** in each of `S2`, `S3` and `S4`, with compatible composition identities. The 18,018 declared comparable descriptor values (`S2`/`S3`) and 462 declared comparable energy values (`S2`/`S4`) showed no mismatches within the notebook's documented tolerances. No empty cells or duplicate composition keys were reported in the populated worksheet ranges. These remain **structural and cross-sheet observations**, not proof of DFT convergence, physical validity or model generalisation. See the reproducible audit outputs linked above.
 
 The published study describes **100 initial material features** and **82 retained model inputs**, after exclusion of 16 invariant features and two non-input fields (a descriptive final-energy field and the formation-energy target). The 231 labelled records and 30,301 candidate records will remain distinct populations, with separate evidence-status definitions.
 
@@ -108,7 +171,7 @@ The published study describes **100 initial material features** and **82 retaine
 
 The nominal composition is **(Ba₁₋ₓ₋ᵧSrₓLaᵧ)TiO₃**, with nominal A-site substitution bounds **x ≥ 0, y ≥ 0 and x + y ≤ 1**.
 
-In the initial workbook inspection, `Ba + Sr + La = 1` for the 231 labelled compositions, while the **tabulated Ti coefficient** follows `Ti = 1 − La/2`; 210 entries have tabulated Ti values below 1. The main paper describes the nominal TiO₃ formula and states that explicit Ti or oxygen vacancies were **not introduced** in the specified first-principles calculations.
+The completed Phase 01 audit confirms `Ba + Sr + La ≈ 1` for the 231 labelled compositions, while the **tabulated Ti coefficient** follows `Ti = 1 − La/2`; 210 entries have tabulated Ti values below 1. The main paper describes the nominal TiO₃ formula and states that explicit Ti or oxygen vacancies were **not introduced** in the specified first-principles calculations.
 
 This requires **scientific reconciliation of source encoding and modelling assumptions**, not automatic data correction. The workflow will retain separate fields for the original coefficients, nominal representation, calculated diagnostic relationships and interpretation status. It will **not** infer actual Ti vacancies, alter the source values or assert charge-compensation mechanisms from a spreadsheet pattern alone.
 
@@ -256,7 +319,7 @@ No link is created merely because two records occupy the same row number or have
 
 ## 7. Implementation roadmap — Phases 00–09
 
-The staged plan delivers scientific data reliability first, followed by analysis and optional machine-learning extensions. **Phase 00 outputs are published above; the remaining phases and outputs are planned unless explicitly identified as completed.**
+The staged plan delivers scientific data reliability first, followed by analysis and optional machine-learning extensions. **Phase 00 is complete and published; Phase 01 has completed its local audit and its public-release files are prepared. Phases 02–09 remain planned or conditional.**
 
 | Phase | Research purpose and implementation | Expected outputs and completion criterion |
 |---|---|---|
@@ -273,9 +336,36 @@ The staged plan delivers scientific data reliability first, followed by analysis
 
 ### Practical implementation sequence
 
-**Immediate priority: Phases 00–01.** Establish source integrity and reproduce the preliminary structural and 231-record linkage observations in a standalone notebook or script. Subsequent stages should proceed only once source semantics and exception handling are documented. Optional modelling follows scientific validation; advanced experimental integration remains a separate future workstream.
+**Immediate priority: publish the reviewed Phase 01 artefacts and begin Phase 02 scientific schema/data dictionary design.** The source registry and workbook audit are complete, and the unresolved candidate-space and Ti–La representation questions must remain visible during schema development. Optional modelling follows scientific validation; advanced experimental integration remains a separate future workstream.
 
-## 8. Planned repository structure
+## 8. Repository organisation and future structure
+
+The **implemented/publication-ready files** are currently organised as follows. Phase 01 links become active after the corresponding commits; the larger development tree below is a separate *target* layout.
+
+```text
+Project_Machine_learning_and_first-principles_guided_desig/
+├── README.md
+├── BaTiO3_Phase00.ipynb
+├── BaTiO3_Phase00.html
+├── BaTiO3_Phase01.ipynb               # Phase 01: upload publication-safe copy
+├── BaTiO3_Phase01.html                # Phase 01: upload public-safe HTML
+├── docs/
+│   └── research_scope.md
+├── manifests/
+│   ├── source_registry.csv
+│   └── source_manifest.json
+└── reports/
+    ├── registration_findings.md
+    └── phase01/
+        ├── source_audit_report.md
+        ├── workbook_inventory.csv
+        ├── column_inventory.csv
+        ├── formula_inventory.csv
+        ├── cross_sheet_checks.csv
+        └── qc_findings.csv
+```
+
+### Longer-term target structure
 
 ```text
 Project_Machine_learning_and_first-principles_guided_desig/
@@ -342,15 +432,15 @@ This is an **independent research and professional portfolio project**, not an i
 | Workstream | Current status |
 |---|---|
 | Main ceramic paper, supplementary information and research-framework review | **Reviewed for project scoping** |
-| S1–S4 sheet inventory and preliminary 231-record cross-sheet comparisons | **Preliminary checks performed; public reproducible audit pending** |
+| S1–S4 sheet inventory and preliminary 231-record cross-sheet comparisons | **Reproduced in Phase 01; reports prepared for publication** |
 | Ti–La composition representation question | **Identified and retained for scientific review** |
 | Phase 00 source registry, manifest, research scope and registration findings | **Completed and published** |
-| Phase 01 workbook audit and automated QC | **Planned; not yet executed** |
+| Phase 01 workbook audit and automated QC | **Completed locally; publication-ready audit artefacts prepared** |
 | Canonical schema, full chemical validation, standardised exports and evidence layer | **Planned** |
 | Independent ML validation, benchmarking and candidate screening | **Conditional; not yet executed** |
 | Experimental processing, robotics and long-term performance validation | **Outside the present dataset and project scope** |
 
-**Next milestone:** develop the Phase 01 executable workbook audit, reproduce the S1–S4 workbook inventory and explicit S2/S3/S4 consistency checks, and publish a transparent findings register before beginning data standardisation or predictive modelling.
+**Next milestone:** publish the Phase 01 notebook, executed report and reviewed metadata summaries; reconcile the candidate-space and Ti–La assumptions with source methodology; then develop the Phase 02 scientific schema and data dictionaries before any standardisation or new predictive modelling.
 
 ---
 
@@ -364,6 +454,7 @@ This is an **independent research and professional portfolio project**, not an i
 **[*Predicting Faster Than We Can Make: Polymer-Specific Process Physics as a Frontier for Autonomous Soft-Matter Discovery*](https://doi.org/10.1002/marc.70420)**. *Macromolecular Rapid Communications* (2026).
 
 *Full publication metadata and complete author lists are provided by the original journal DOI records.*
+
 
 
 
