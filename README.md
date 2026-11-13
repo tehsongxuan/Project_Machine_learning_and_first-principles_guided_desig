@@ -17,6 +17,7 @@ Phase 00 source-registration artefacts are published in this repository. **The P
 
 - [Phase 01 — executed Jupyter notebook](./BaTiO3_Phase01.ipynb)
 - [Phase 01 — executed scientific HTML report](./BaTiO3_Phase01.html)
+- [View Phase 01 HTML report in a browser (external preview)](https://htmlpreview.github.io/?https://github.com/tehsongxuan/Project_Machine_learning_and_first-principles_guided_desig/blob/main/BaTiO3_Phase01.html)
 - [Phase 01 — source audit findings and scientific review priorities](./reports/phase01/source_audit_report.md)
 - [Phase 01 — worksheet inventory (CSV)](./reports/phase01/workbook_inventory.csv)
 - [Phase 01 — column inventory and source headings (CSV)](./reports/phase01/column_inventory.csv)
