@@ -1,0 +1,5 @@
+sheet,data_rows,columns,unique_composition_keys,duplicate_composition_rows,unreadable_composition_rows,empty_cells,rows_with_empty_cells,formula_cells,uncached_formula_cells,nonblank_cells,scientific_role
+S1,30301,100,30301,0,0,0,0,30301,0,3030100,candidate descriptors
+S2,231,102,231,0,0,0,0,0,0,23562,DFT-labelled descriptors and energies
+S3,231,82,231,0,0,0,0,0,0,18942,selected ML input descriptors
+S4,231,10,231,0,0,0,0,0,0,2310,reported method/structure and energies

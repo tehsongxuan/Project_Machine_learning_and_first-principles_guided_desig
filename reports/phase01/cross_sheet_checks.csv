@@ -1,0 +1,7 @@
+comparison,check,matches_or_comparisons,missing_right,missing_left,value_mismatches,method_or_note
+S2 to S3,composition key coverage,231,0,0,0,Ba/Sr/La/Ti composite key
+S2 to S4,composition key coverage,231,0,0,0,Ba/Sr/La/Ti composite key
+S3 to S4,composition key coverage,231,0,0,0,Ba/Sr/La/Ti composite key
+S2 to S3,matched values,18018,0,0,0,"78 declared comparable fields; tolerance max(1e-7, relative 1e-9)"
+S2 to S4,matched values,462,0,0,0,"2 declared comparable fields; tolerance max(1e-7, relative 1e-9)"
+S2 to S1,labelled key present among S1 candidates,21,210,0,0,Presence is not evidence of DFT labels for all S1 rows

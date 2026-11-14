@@ -1,0 +1,3 @@
+section,severity,code,sheet,location,count,evidence,action
+linkage,WARNING,S2_OUTSIDE_S1,S2/S1,compositions,210,Labelled compositions absent from candidate sheet,Review published candidate domain
+chemistry,REVIEW,TI_LA_REPRESENTATION,S2,Ti/La coefficients,210,Ti < 1 for 210 records; Ti=1−La/2 matches 231 of 231,Reconcile spreadsheet coefficient convention with VCA and source methods; do not infer vacancies
