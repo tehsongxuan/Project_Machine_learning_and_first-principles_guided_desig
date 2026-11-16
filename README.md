@@ -25,7 +25,7 @@ Phase 00 source-registration artefacts are published in this repository. **The P
 - [Phase 01 — cross-sheet checks (CSV)](./reports/phase01/cross_sheet_checks.csv)
 - [Phase 01 — quality-control findings (CSV)](./reports/phase01/qc_findings.csv)
 
-The CSV/Markdown reports above are *generated audit metadata*, not the underlying spreadsheet. Verify their specific contents and source-data reuse terms before public upload, especially the column-heading inventory. **The linked Phase 01 files have not been assumed to be on GitHub until they are actually uploaded.**
+The CSV/Markdown reports above are *generated audit metadata*, not the underlying spreadsheet. Verify their specific contents and source-data reuse terms before public upload, especially the column-heading inventory. 
 
 - [Project implementation roadmap — Phases 00–09](#7-implementation-roadmap--phases-0009)
 
